@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUB Ecosystem - Platforma Web3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/core.css">
+</head>
+<body>
+    <!-- STATIC BACKGROUND ELEMENTS -->
+    <canvas id="networkCanvas"></canvas>
+    <div class="mouse-follower" id="mouseFollower"></div>
+    
+    <!-- CONTENT CONTAINER - FLEXIBLE & NEVER BLOCKS -->
+    <div class="content" id="mainContent">
+        <!-- DYNAMIC CONTENT LOADED HERE -->
+        <div class="loading-placeholder">
+            <div class="loading-spinner"></div>
+            <p>Ładowanie HUB Ecosystem...</p>
+        </div>
+    </div>
+
+    <!-- CORE SCRIPTS -->
+    <script src="scripts/core/loader.js" type="module"></script>
+    <script src="scripts/core/network.js"></script>
+</body>
+</html>

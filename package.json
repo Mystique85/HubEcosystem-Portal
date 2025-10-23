@@ -1,0 +1,20 @@
+{
+  "name": "hub-ecosystem-website",
+  "version": "1.0.0",
+  "description": "Central platform connecting Web3 innovations and communities across multiple networks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mystique85/hub-ecosystem-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mystique85/hub-ecosystem-website/issues"
+  },
+  "homepage": "https://github.com/Mystique85/hub-ecosystem-website#readme"
+}
