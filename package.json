@@ -1,20 +1,22 @@
 {
-  "name": "hub-ecosystem-website",
+  "name": "hub-ecosystem-portal",
   "version": "1.0.0",
   "description": "Central platform connecting Web3 innovations and communities across multiple networks.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
+    "dev": "live-server",
+    "start": "live-server --port=3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mystique85/hub-ecosystem-website.git"
+    "url": "git+https://github.com/Mystique85/HubEcosystem-Portal.git"
   },
-  "keywords": [],
+  "keywords": ["web3", "blockchain", "ecosystem", "portal"],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Mystique85/hub-ecosystem-website/issues"
+    "url": "https://github.com/Mystique85/HubEcosystem-Portal/issues"
   },
-  "homepage": "https://github.com/Mystique85/hub-ecosystem-website#readme"
+  "homepage": "https://github.com/Mystique85/HubEcosystem-Portal#readme"
 }
