@@ -57,6 +57,7 @@ class ComponentLoader {
 
         for (const section of sections) {
             await this.loadSection(section);
+            console.log(`✅ Loaded: ${section}`);
         }
         
         // Hide loading placeholder
@@ -65,10 +66,9 @@ class ComponentLoader {
             placeholder.style.display = 'none';
         }
 
-        // Initialize other components after DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            this.initializeComponents();
-        });
+        console.log('🎯 ALL SECTIONS LOADED - Karuzela może startować');
+        
+        this.initializeComponents();
     }
 
     async loadSection(sectionPath) {

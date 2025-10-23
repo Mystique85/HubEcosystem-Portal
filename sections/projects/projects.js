@@ -7,30 +7,38 @@ class ProjectsCarousel {
         this.cards = [];
         this.filteredCards = [];
         this.indicators = [];
+        this.isInitialized = false;
+        
         this.init();
     }
 
     init() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
+        // POCZEKAJ 500ms ZANIM ZAINICJALIZUJESZ - PROSTE ROZWIĄZANIE
+        setTimeout(() => {
+            if (!this.isInitialized) {
                 this.initializeCarousel();
-            });
-        } else {
-            this.initializeCarousel();
-        }
+                this.isInitialized = true;
+                console.log('✅ ProjectsCarousel initialized after delay');
+            }
+        }, 500);
     }
 
     initializeCarousel() {
-        setTimeout(() => {
-            this.carousel = document.getElementById('projectsCarousel');
-            this.cards = Array.from(document.querySelectorAll('.card'));
-            this.filteredCards = [...this.cards];
-            
-            this.setupEventListeners();
-            this.setupResponsive();
-            this.updateCarousel();
-            this.createIndicators();
-        }, 100);
+        this.carousel = document.getElementById('projectsCarousel');
+        this.cards = Array.from(document.querySelectorAll('.card'));
+        this.filteredCards = [...this.cards];
+        
+        console.log('🔍 Found elements:', {
+            carousel: !!this.carousel,
+            cards: this.cards.length,
+            prevBtn: !!document.querySelector('.carousel-prev'),
+            nextBtn: !!document.querySelector('.carousel-next')
+        });
+        
+        this.setupEventListeners();
+        this.setupResponsive();
+        this.updateCarousel();
+        this.createIndicators();
     }
 
     setupEventListeners() {
