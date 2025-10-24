@@ -1,11 +1,14 @@
 {
   "name": "hub-ecosystem-portal",
   "version": "1.0.0",
+  "type": "module",
   "description": "Central platform connecting Web3 innovations and communities across multiple networks.",
   "main": "index.html",
   "scripts": {
     "dev": "live-server",
     "start": "live-server --port=3000",
+    "build:css": "tailwindcss -i ./src/input.css -o ./styles/core.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./styles/core.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Mystique85/HubEcosystem-Portal/issues"
   },
-  "homepage": "https://github.com/Mystique85/HubEcosystem-Portal#readme"
+  "homepage": "https://github.com/Mystique85/HubEcosystem-Portal#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
+  }
 }

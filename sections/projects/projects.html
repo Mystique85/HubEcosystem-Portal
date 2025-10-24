@@ -1,187 +1,198 @@
 <!-- Improved Projects Section with Carousel -->
-<section id="projects" class="section">
-    <div class="container">
-        <h2 class="section-title">HUB ECOSYSTEM PROJECT</h2>
+<section id="projects" class="section py-20">
+    <div class="container max-w-7xl mx-auto px-6">
+        <h2 class="section-title text-4xl font-bold mb-12 text-center relative inline-block left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent">
+            HUB ECOSYSTEM PROJECTS
+            <div class="absolute -bottom-4 left-0 w-full h-1 bg-gradient-to-r from-accent-neon via-accent-purple to-accent-neon bg-[length:200%_auto] rounded-full animate-gradient-shift"></div>
+        </h2>
         
-        <div class="projects-filter">
-            <button class="filter-btn active" data-filter="all">
-                <i class="fas fa-globe-americas"></i>
+        <div class="projects-filter flex justify-center gap-4 mb-12 flex-wrap">
+            <button class="filter-btn bg-white/10 border border-white/20 text-text-light px-6 py-3 rounded-full cursor-pointer transition-all duration-300 font-medium flex items-center gap-2 hover:bg-accent-neon hover:text-primary-dark hover:border-accent-neon hover:-translate-y-1 hover:shadow-lg hover:shadow-accent-neon/30 active" data-filter="all">
+                <i class="fas fa-globe-americas text-lg transition-transform duration-300"></i>
                 <span>All</span>
             </button>
-            <button class="filter-btn" data-filter="base">
-                <i class="fas fa-layer-group"></i>
+            <button class="filter-btn bg-white/10 border border-white/20 text-text-light px-6 py-3 rounded-full cursor-pointer transition-all duration-300 font-medium flex items-center gap-2 hover:bg-accent-neon hover:text-primary-dark hover:border-accent-neon hover:-translate-y-1 hover:shadow-lg hover:shadow-accent-neon/30" data-filter="base">
+                <i class="fas fa-layer-group text-lg transition-transform duration-300"></i>
                 <span>Base</span>
             </button>
-            <button class="filter-btn" data-filter="celo">
-                <i class="fas fa-seedling"></i>
+            <button class="filter-btn bg-white/10 border border-white/20 text-text-light px-6 py-3 rounded-full cursor-pointer transition-all duration-300 font-medium flex items-center gap-2 hover:bg-accent-neon hover:text-primary-dark hover:border-accent-neon hover:-translate-y-1 hover:shadow-lg hover:shadow-accent-neon/30" data-filter="celo">
+                <i class="fas fa-seedling text-lg transition-transform duration-300"></i>
                 <span>Celo</span>
             </button>
-            <button class="filter-btn" data-filter="soon">
-                <i class="fas fa-clock"></i>
+            <button class="filter-btn bg-white/10 border border-white/20 text-text-light px-6 py-3 rounded-full cursor-pointer transition-all duration-300 font-medium flex items-center gap-2 hover:bg-accent-neon hover:text-primary-dark hover:border-accent-neon hover:-translate-y-1 hover:shadow-lg hover:shadow-accent-neon/30" data-filter="soon">
+                <i class="fas fa-clock text-lg transition-transform duration-300"></i>
                 <span>Coming Soon</span>
             </button>
         </div>
 
         <!-- Carousel Container -->
-        <div class="carousel-container">
-            <button class="carousel-btn carousel-prev" aria-label="Previous cards">
+        <div class="carousel-container relative max-w-7xl mx-auto">
+            <button class="carousel-btn carousel-prev absolute -left-12 top-1/2 -translate-y-1/2 bg-card-bg border-2 border-accent-neon text-accent-neon w-12 h-12 rounded-full cursor-pointer flex items-center justify-center text-xl transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:scale-110 z-10" aria-label="Previous cards">
                 <i class="fas fa-chevron-left"></i>
             </button>
             
-            <div class="carousel-wrapper">
-                <div class="cards-carousel" id="projectsCarousel">
-                    <!-- Talent Protocol - NOW FIRST -->
-                    <div class="card base-card" data-categories="base">
-                        <div class="card-icon">
-                            <img src="images/talent.logo.dark.svg" alt="Talent Protocol" class="card-logo">
+            <div class="carousel-wrapper overflow-hidden rounded-2xl w-full">
+                <div class="cards-carousel flex transition-transform duration-500 ease-in-out gap-8 p-4" id="projectsCarousel">
+                    <!-- Talent Protocol -->
+                    <div class="card base-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="base">
+                        <div class="card-icon mb-4">
+                            <img src="images/talent.logo.dark.svg" alt="Talent Protocol" class="card-logo w-36 h-8 object-contain mx-auto transition-transform duration-300">
                         </div>
-                        <h3>Talent Protocol</h3>
-                        <p>Decentralized Web3 platform for building and verifying professional reputation</p>
-                        <div class="card-tags">
-                            <span class="card-tag base">Base</span>
-                            <span class="card-tag">SocialFi</span>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">Talent Protocol</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">Decentralized Web3 platform for building and verifying professional reputation</p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag base bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Base</span>
+                            <span class="card-tag bg-accent-blue/20 text-accent-blue px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">SocialFi</span>
                         </div>
-                        <div class="card-actions">
-                            <a href="https://discord.gg/talentprotocol" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-discord"></i>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="https://discord.gg/talentprotocol" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-discord text-xs"></i>
                             </a>
-                            <a href="https://x.com/talentprotocol" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-twitter"></i>
+                            <a href="https://x.com/talentprotocol" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-twitter text-xs"></i>
                             </a>
-                            <a href="https://www.talentprotocol.com" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-globe"></i>
+                            <a href="https://www.talentprotocol.com" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fas fa-globe text-xs"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Project 1 - HelloCelo -->
-                    <div class="card celo-card" data-categories="celo">
-                        <div class="card-icon">
+                    <!-- HelloCelo -->
+                    <div class="card celo-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="celo">
+                        <div class="card-icon text-4xl mb-4 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent transition-transform duration-300">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <h3>HelloCelo</h3>
-                        <p><strong class="highlight-benefit">Decentralized messaging dApp</strong> on Celo network <strong class="highlight-benefit">rewarding users</strong> with <span class="highlight-token">$HC tokens</span> for every message. <strong class="highlight-benefit">Experience Web3 communication with real economic incentives</strong>.</p>
-                        <div class="card-tags">
-                            <span class="card-tag celo">Celo</span>
-                            <span class="card-tag">Messaging</span>
-                            <span class="card-tag">Rewards</span>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">HelloCelo</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">
+                            <strong class="highlight-benefit font-semibold text-text-light">Decentralized messaging dApp</strong> on Celo network <strong class="highlight-benefit font-semibold text-text-light">rewarding users</strong> with <span class="highlight-token bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent font-bold">$HC tokens</span> for every message.
+                        </p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag celo bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Celo</span>
+                            <span class="card-tag bg-accent-neon/20 text-accent-neon px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Messaging</span>
+                            <span class="card-tag bg-accent-purple/20 text-accent-purple px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Rewards</span>
                         </div>
-                        <div class="card-actions">
-                            <a href="https://github.com/Mystique85/HelloCeloV2" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-github"></i>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="https://github.com/Mystique85/HelloCeloV2" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-github text-xs"></i>
                             </a>
-                            <a href="https://x.com/HelloCelo_HC" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-twitter"></i>
+                            <a href="https://x.com/HelloCelo_HC" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-twitter text-xs"></i>
                             </a>
-                            <a href="https://hello-celo-v2.vercel.app/" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-globe"></i>
+                            <a href="https://hello-celo-v2.vercel.app/" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fas fa-globe text-xs"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Project 2 - HelloVote -->
-                    <div class="card celo-card" data-categories="celo">
-                        <div class="card-icon">
+                    <!-- HelloVote -->
+                    <div class="card celo-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="celo">
+                        <div class="card-icon text-4xl mb-4 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent transition-transform duration-300">
                             <i class="fas fa-vote-yea"></i>
                         </div>
-                        <h3>HelloVote</h3>
-                        <p><strong class="highlight-benefit">Anonymous voting platform</strong> where <strong class="highlight-benefit">community engagement pays off</strong>. Earn <span class="highlight-token">$VOTE tokens</span> for <strong class="highlight-benefit">creating polls and participating in decentralized governance</strong>.</p>
-                        <div class="card-tags">
-                            <span class="card-tag celo">Celo</span>
-                            <span class="card-tag">DAO</span>
-                            <span class="card-tag">Governance</span>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">HelloVote</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">
+                            <strong class="highlight-benefit font-semibold text-text-light">Anonymous voting platform</strong> where <strong class="highlight-benefit font-semibold text-text-light">community engagement pays off</strong>. Earn <span class="highlight-token bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent font-bold">$VOTE tokens</span>.
+                        </p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag celo bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Celo</span>
+                            <span class="card-tag bg-accent-blue/20 text-accent-blue px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">DAO</span>
+                            <span class="card-tag bg-accent-purple/20 text-accent-purple px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Governance</span>
                         </div>
-                        <div class="card-actions">
-                            <a href="https://github.com/Mystique85/hello-vote" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-github"></i>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="https://github.com/Mystique85/hello-vote" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-github text-xs"></i>
                             </a>
-                            <a href="https://x.com/HelloCelo_HC" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-twitter"></i>
+                            <a href="https://x.com/HelloCelo_HC" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-twitter text-xs"></i>
                             </a>
-                            <a href="https://hello-vote.vercel.app/" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-globe"></i>
+                            <a href="https://hello-vote.vercel.app/" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fas fa-globe text-xs"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Call to Action - Collaboration -->
-                    <div class="card cta-card" data-categories="all soon">
-                        <div class="card-icon">
+                    <!-- Collaboration CTA -->
+                    <div class="card cta-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="all soon">
+                        <div class="card-icon text-4xl mb-4 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent transition-transform duration-300">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h3>Your Project Here?</h3>
-                        <p>Join our ecosystem! Showcase your project to thousands of Web3 enthusiasts and gain exposure in our growing community.</p>
-                        <div class="card-actions">
-                            <a href="mailto:contact@example.com" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-envelope"></i>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">Your Project Here?</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">Join our ecosystem! Showcase your project to thousands of Web3 enthusiasts and gain exposure in our growing community.</p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag bg-accent-neon/20 text-accent-neon px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Collaboration</span>
+                            <span class="card-tag bg-accent-purple/20 text-accent-purple px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Partnership</span>
+                        </div>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="mailto:contact@example.com" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fas fa-envelope text-xs"></i>
                             </a>
-                            <a href="https://t.me/your-channel" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-telegram"></i>
+                            <a href="https://t.me/your-channel" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-telegram text-xs"></i>
                             </a>
-                            <a href="https://discord.gg/your-server" class="btn btn-icon" target="_blank">
-                                <i class="fab fa-discord"></i>
+                            <a href="https://discord.gg/your-server" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30" target="_blank">
+                                <i class="fab fa-discord text-xs"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Coming Soon - Placeholder 1 -->
-                    <div class="card soon-card" data-categories="soon">
-                        <div class="card-icon">
+                    <!-- Coming Soon 1 -->
+                    <div class="card soon-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="soon">
+                        <div class="card-icon text-4xl mb-4 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent transition-transform duration-300">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h3>New Project</h3>
-                        <p>A new blockchain network will soon join our ecosystem. Follow our social media to stay updated!</p>
-                        <div class="card-tags">
-                            <span class="card-tag">Coming Soon</span>
-                            <span class="card-tag">New Chain</span>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">New Project</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">A new blockchain network will soon join our ecosystem. Follow our social media to stay updated!</p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag bg-accent-purple/20 text-accent-purple px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Coming Soon</span>
+                            <span class="card-tag bg-accent-blue/20 text-accent-blue px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">New Chain</span>
                         </div>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Coming Soon - Placeholder 2 -->
-                    <div class="card soon-card" data-categories="soon">
-                        <div class="card-icon">
+                    <!-- Coming Soon 2 -->
+                    <div class="card soon-card rounded-2xl p-5 text-center border border-white/10 backdrop-blur-md transition-all duration-400 hover:-translate-y-3 hover:border-accent-neon hover:shadow-2xl hover:shadow-accent-neon/30 flex flex-col w-[276px] h-[414px] flex-shrink-0" data-categories="soon">
+                        <div class="card-icon text-4xl mb-4 bg-gradient-to-r from-accent-neon to-accent-purple bg-clip-text text-transparent transition-transform duration-300">
                             <i class="fas fa-layer-group"></i>
                         </div>
-                        <h3>Another Network</h3>
-                        <p>We're preparing integration with another popular blockchain network. Details coming soon!</p>
-                        <div class="card-tags">
-                            <span class="card-tag">Coming Soon</span>
-                            <span class="card-tag">Integration</span>
+                        <h3 class="text-xl font-semibold mb-3 text-text-light transition-colors duration-300">Another Network</h3>
+                        <p class="text-text-gray mb-6 leading-relaxed flex-grow transition-colors duration-300 text-sm">We're preparing integration with another popular blockchain network. Details coming soon!</p>
+                        <div class="card-tags flex gap-2 justify-center flex-wrap mb-4">
+                            <span class="card-tag bg-accent-purple/20 text-accent-purple px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Coming Soon</span>
+                            <span class="card-tag bg-accent-blue/20 text-accent-blue px-2 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:-translate-y-1">Integration</span>
                         </div>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                        <div class="card-actions flex gap-2 justify-center mt-auto">
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
-                            <a href="#" class="btn btn-icon" target="_blank">
-                                <i class="fas fa-clock"></i>
+                            <a href="#" class="btn btn-icon w-9 h-7 rounded-2xl border-2 border-accent-neon bg-transparent text-accent-neon flex items-center justify-center transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:-translate-y-1 hover:scale-110 hover:shadow-lg hover:shadow-accent-neon/30">
+                                <i class="fas fa-clock text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button class="carousel-btn carousel-next" aria-label="Next cards">
+            <button class="carousel-btn carousel-next absolute -right-12 top-1/2 -translate-y-1/2 bg-card-bg border-2 border-accent-neon text-accent-neon w-12 h-12 rounded-full cursor-pointer flex items-center justify-center text-xl transition-all duration-300 hover:bg-accent-neon hover:text-primary-dark hover:scale-110 z-10" aria-label="Next cards">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
 
-        <!-- Carousel Indicators -->
-        <div class="carousel-indicators" id="carouselIndicators">
-            <!-- Indicators will be generated by JavaScript -->
+        <!-- Miniature Cards Navigation -->
+        <div class="carousel-miniatures flex justify-center gap-3 mt-8" id="carouselMiniatures">
+            <!-- Miniaturki będą tu dodane przez JavaScript -->
         </div>
     </div>
 </section>

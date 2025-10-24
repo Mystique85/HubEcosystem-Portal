@@ -50,12 +50,6 @@ class InteractiveNetwork {
     handleMouseMove(e) {
         this.mouse.x = e.clientX;
         this.mouse.y = e.clientY;
-
-        const follower = document.getElementById('mouseFollower');
-        if (follower) {
-            follower.style.left = (e.clientX - 10) + 'px';
-            follower.style.top = (e.clientY - 10) + 'px';
-        }
     }
 
     updateNodes() {
@@ -159,7 +153,6 @@ class InteractiveNetwork {
     }
 }
 
-// Initialize after DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {

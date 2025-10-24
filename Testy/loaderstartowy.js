@@ -1,4 +1,3 @@
-// scripts/core/loader.js
 class ComponentLoader {
     constructor() {
         this.loadedComponents = new Set();
@@ -46,12 +45,11 @@ class ComponentLoader {
     }
 
     async loadPageStructure() {
-        // NOWA KOLEJNOŚĆ: Header → Ticker → Projects
+        // SEKCJA PROJECTS JAKO PIERWSZA
         const sections = [
-            'components/modals/gm-modal/gm-modal',
-            'components/header/header',           // PIERWSZE: Header
-            'components/ticker/ticker',           // DRUGIE: Ticker  
-            'sections/projects/projects',         // TRZECIE: Projects
+            'sections/projects/projects',  // NOW PIERWSZE
+            'components/header/header',
+            'components/ticker/ticker',
             'components/sidebar/sidebar',
             'sections/about-project/about-project',
             'sections/community/community',
@@ -69,7 +67,7 @@ class ComponentLoader {
             placeholder.style.display = 'none';
         }
 
-        console.log('🎯 ALL SECTIONS LOADED - Nowa kolejność: Header → Ticker → Projects');
+        console.log('🎯 ALL SECTIONS LOADED - Karuzela może startować');
         
         this.initializeComponents();
     }
@@ -123,7 +121,7 @@ class ComponentLoader {
             }
         });
         
-        console.log('GM Popover i inne komponenty zainicjalizowane');
+        console.log('Other components initialized');
     }
 
     createRippleEffect(e) {

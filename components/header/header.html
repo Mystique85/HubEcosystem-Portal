@@ -1,22 +1,25 @@
-<nav class="main-nav">
-    <div class="nav-container">
-        <div class="nav-logo">
-            <img src="images/hub-logo.png" alt="HUB Ecosystem" class="logo-image">
-            <span>HUB Ecosystem</span>
+<nav class="fixed top-0 left-0 right-0 z-50 bg-primary-dark/90 backdrop-blur-md border-b border-white/10 py-3">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div class="nav-logo flex items-center gap-3">
+            <img src="images/hub-logo.png" alt="HUB Ecosystem" class="logo-image w-8 h-8 rounded-lg object-contain">
+            <span class="text-lg font-mono font-semibold tracking-tight animate-gradient-shift bg-gradient-to-r from-accent-neon via-accent-purple to-accent-blue bg-clip-text text-transparent bg-[length:200%_auto]">
+                HUB Ecosystem
+            </span>
         </div>
-        <ul class="nav-links">
-            <li><a href="#projekty">Projekty</a></li>
-            <li><a href="#spolecznosc">Społeczność</a></li>
-            <li><a href="#dokumentacja">Dokumentacja</a></li>
+        
+        <ul class="nav-links flex gap-6 items-center list-none">
+            <li><a href="#projects" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Project Gallery</a></li>
+            <li><a href="#community" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Community</a></li>
+            <li><a href="#dokumentacja" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Documentation</a></li>
             <li>
-                <a href="#" class="nav-news-btn" id="newsBtn">
-                    <i class="fas fa-newspaper"></i> Crypto News
+                <a href="#" class="nav-news-btn text-text-light text-sm font-medium bg-accent-blue/10 border border-accent-blue/30 hover:bg-accent-blue/20 hover:border-accent-blue transition-all px-3 py-2 rounded-lg flex items-center gap-2" id="newsBtn">
+                    <i class="fas fa-newspaper text-xs"></i> Crypto News
                 </a>
             </li>
             <li>
-                <a href="#spolecznosc" class="nav-gm-btn">
-                    SAY GM <i class="fas fa-hand-wave"></i>
-                </a>
+                <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform px-4 py-2 rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2">
+                    SAY GM <i class="fas fa-hand-wave text-xs"></i>
+                </button>
             </li>
         </ul>
     </div>

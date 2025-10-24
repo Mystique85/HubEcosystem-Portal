@@ -1,0 +1,417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes ripple {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes gradientShift {
+    0%, 100% { 
+        background: linear-gradient(135deg, #00ff88, #8b5cf6, #3b82f6);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    50% { 
+        background: linear-gradient(135deg, #8b5cf6, #3b82f6, #00ff88);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.hello-celo-gradient {
+    background: linear-gradient(135deg, #fccc05, #ff6b00, #ff0080) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    font-weight: 700;
+}
+
+.hello-vote-gradient {
+    background: linear-gradient(135deg, #00ff88, #0052ff, #8b5cf6) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    font-weight: 700;
+}
+
+.base-blue {
+    color: #0052ff;
+    font-weight: 700;
+}
+
+.crypto-ticker:hover .ticker-wrapper {
+    animation-play-state: paused;
+}
+
+.crypto-change.positive {
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+}
+
+.crypto-change.negative {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.news-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.news-title a:hover {
+    color: #00ff88;
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.3);
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 136, 0.5);
+}
+
+.sidebar-item.active {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(139, 92, 246, 0.1));
+    color: #00ff88;
+    border-left: 3px solid #00ff88;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.loading-spinner {
+    border-top-color: #00ff88 !important;
+}
+
+.base-card {
+    background: linear-gradient(135deg, rgba(0, 82, 255, 0.1), rgba(59, 130, 246, 0.05), rgba(30, 30, 30, 0.5));
+}
+
+.celo-card {
+    background: linear-gradient(135deg, rgba(252, 204, 5, 0.1), rgba(245, 158, 11, 0.05), rgba(30, 30, 30, 0.5));
+}
+
+.soon-card {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05), rgba(30, 30, 30, 0.5));
+}
+
+.cta-card {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(139, 92, 246, 0.05), rgba(30, 30, 30, 0.5));
+}
+
+.border-glow {
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.bg-card-bg {
+    background: rgba(30, 30, 30, 0.7);
+}
+
+.bg-primary-dark {
+    background: #0a0a0a;
+}
+
+.bg-secondary-dark {
+    background: #111111;
+}
+
+.text-accent-neon {
+    color: #00ff88;
+}
+
+.text-accent-purple {
+    color: #8b5cf6;
+}
+
+.text-accent-blue {
+    color: #3b82f6;
+}
+
+.text-accent-orange {
+    color: #f59e0b;
+}
+
+.text-text-light {
+    color: #ffffff;
+}
+
+.text-text-gray {
+    color: #a1a1aa;
+}
+
+.animate-reverse {
+    animation-direction: reverse;
+}
+
+.sidebar:hover .sidebar-link span {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sidebar:hover .settings-button span {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.filter-btn.active {
+    background: #00ff88;
+    color: #0a0a0a;
+    border-color: #00ff88;
+}
+
+.carousel-indicator.active {
+    background: #00ff88;
+    transform: scale(1.2);
+}
+
+.highlight-token {
+    background: linear-gradient(135deg, #00ff88, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+.highlight-benefit {
+    font-weight: 600;
+}
+
+.card-tag.base {
+    background: rgba(0, 82, 255, 0.2);
+    color: #0052ff;
+}
+
+.card-tag.celo {
+    background: rgba(252, 204, 5, 0.2);
+    color: #fccc05;
+}
+
+.btn-discord {
+    background: linear-gradient(135deg, #5865F2, #4752c4);
+}
+
+.btn-twitter {
+    background: linear-gradient(135deg, #1DA1F2, #0f7ae5);
+}
+
+.btn-secondary {
+    background: rgba(30, 30, 30, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.build-notice {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.separator-line {
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+}
+
+.social-link-maintenance:hover {
+    border-color: #00ff88;
+}
+
+.news-modal {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.crypto-icon-placeholder {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+#networkCanvas {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+}
+
+.carousel-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.cards-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 2rem;
+    width: max-content;
+}
+
+.card {
+    flex: 0 0 276px;
+    height: 414px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    min-height: 414px;
+    max-height: 414px;
+    min-width: 276px;
+    max-width: 276px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+}
+
+.carousel-prev {
+    left: -3rem;
+}
+
+.carousel-next {
+    right: -3rem;
+}
+
+@media (max-width: 1400px) {
+    .carousel-prev {
+        left: -1rem;
+    }
+    
+    .carousel-next {
+        right: -1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        padding: 0 1rem;
+    }
+    
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+    
+    .carousel-prev {
+        left: 0.5rem;
+    }
+    
+    .carousel-next {
+        right: 0.5rem;
+    }
+    
+    .card {
+        flex: 0 0 calc(100vw - 3rem);
+        min-width: calc(100vw - 3rem);
+        max-width: calc(100vw - 3rem);
+        height: auto;
+        min-height: 400px;
+    }
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: #00ff88;
+    transform: scale(1.2);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.carousel-miniatures {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.carousel-miniature {
+    width: 3rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+}
+
+.carousel-miniature:hover {
+    transform: scale(1.15);
+    border-color: #00ff88 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.carousel-miniature.active {
+    border-color: #00ff88;
+    transform: scale(1.2);
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+}
+
+.carousel-miniature.bg-blue-500\/20 {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.carousel-miniature.bg-yellow-500\/20 {
+    background: rgba(245, 158, 11, 0.2);
+}
+
+.carousel-miniature.bg-purple-500\/20 {
+    background: rgba(139, 92, 246, 0.2);
+}
+
+.carousel-miniature.bg-accent-neon\/20 {
+    background: rgba(0, 255, 136, 0.2);
+}

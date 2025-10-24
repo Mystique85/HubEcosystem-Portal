@@ -1,20 +1,17 @@
 <!-- components/modals/gm-modal/gm-modal.html -->
 <div class="gm-popover-container fixed z-50 hidden transform transition-all duration-300 ease-out">
-  <!-- Animated Border -->
-  <div class="gm-popover-border absolute -inset-0.5 bg-gradient-to-r from-accent-neon via-accent-purple to-accent-blue rounded-2xl opacity-75 group-hover:opacity-100 blur transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
-  
-  <!-- Arrow -->
-  <div class="gm-popover-arrow absolute w-4 h-4 bg-gradient-to-br from-accent-neon/20 to-accent-purple/20 border border-white/20 backdrop-blur-md transform rotate-45 -top-2 left-1/2 -translate-x-1/2 shadow-lg"></div>
+  <!-- NOWE: Osobny div dla obramowania -->
+  <div class="gm-popover-border"></div>
   
   <!-- Popover Content -->
-  <div class="gm-popover-content relative bg-gradient-to-br from-primary-dark/95 via-accent-purple/10 to-accent-neon/5 border border-white/20 rounded-xl backdrop-blur-2xl p-6 shadow-2xl shadow-accent-neon/20 max-w-sm group">
+  <div class="gm-popover-content relative bg-gradient-to-br from-primary-dark/95 via-accent-purple/10 to-accent-neon/5 rounded-xl backdrop-blur-2xl p-6 shadow-2xl shadow-accent-neon/20 max-w-sm group">
     
     <!-- Header -->
     <div class="text-center mb-4">
-      <div class="text-accent-neon text-sm font-bold mb-1 neon-text-pulse tracking-wider">
+      <div class="text-accent-neon text-sm font-bold mb-1 subtle-glow tracking-wider">
         ⚡ GM DAPP PORTAL ⚡
       </div>
-      <h3 class="text-white font-black text-lg gradient-text-hover cursor-pointer" data-text="YOUR GM AWAITS! 🦄">
+      <h3 class="text-white font-black text-lg gradient-text-hover cursor-pointer">
         YOUR GM AWAITS! 🦄
       </h3>
     </div>

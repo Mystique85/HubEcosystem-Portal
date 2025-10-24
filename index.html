@@ -6,22 +6,100 @@
     <title>HUB Ecosystem - Platforma Web3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/core.css">
+    <style>
+        .layout-boundary {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 3rem);
+            max-width: 80rem;
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        .layout-boundary::before,
+        .layout-boundary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--layout-color, rgba(0, 255, 136, 0.2));
+            animation: layoutColorShift 8s ease-in-out infinite;
+        }
+
+        .layout-boundary::before {
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .layout-boundary::after {
+            right: 0;
+            animation-delay: 4s;
+        }
+
+        @keyframes layoutColorShift {
+            0%, 100% { --layout-color: rgba(0, 255, 136, 0.2); }
+            25% { --layout-color: rgba(139, 92, 246, 0.2); }
+            50% { --layout-color: rgba(59, 130, 246, 0.2); }
+            75% { --layout-color: rgba(245, 158, 11, 0.2); }
+        }
+
+        .layout-boundary {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body:hover .layout-boundary {
+            opacity: 0.4;
+        }
+
+        @media (max-width: 1400px) {
+            .layout-boundary {
+                width: calc(100% - 2rem);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .layout-boundary {
+                width: calc(100% - 1rem);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout-boundary {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .layout-boundary::before,
+            .layout-boundary::after {
+                display: none;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#0a0a0a] text-white min-h-screen overflow-x-hidden">
     <!-- STATIC BACKGROUND ELEMENTS -->
-    <canvas id="networkCanvas"></canvas>
+    <canvas id="networkCanvas" class="fixed top-0 left-0 w-full h-full -z-10 
+        bg-[radial-gradient(circle_at_20%_80%,rgba(139,92,246,0.1)_0%,transparent_50%),radial-gradient(circle_at_80%_20%,rgba(0,255,136,0.05)_0%,transparent_50%),linear-gradient(135deg,#0a0a0a_0%,#111111_100%)]">
+    </canvas>
+    
+    <!-- LAYOUT BOUNDARY INDICATOR -->
+    <div class="layout-boundary"></div>
+    
     <div class="mouse-follower" id="mouseFollower"></div>
     
-    <!-- CONTENT CONTAINER - FLEXIBLE & NEVER BLOCKS -->
-    <div class="content" id="mainContent">
-        <!-- DYNAMIC CONTENT LOADED HERE -->
-        <div class="loading-placeholder">
-            <div class="loading-spinner"></div>
-            <p>Ładowanie HUB Ecosystem...</p>
+    <!-- CONTENT CONTAINER -->
+    <div class="content relative z-10 min-h-screen flex flex-col" id="mainContent">
+        <div class="loading-placeholder flex flex-col items-center justify-center min-h-screen gap-4">
+            <div class="loading-spinner w-12 h-12 border-3 border-white/10 border-t-[#00ff88] rounded-full animate-spin"></div>
+            <p class="text-gray-400">Ładowanie HUB Ecosystem...</p>
         </div>
     </div>
 
-    <!-- CORE SCRIPTS -->
     <script src="scripts/core/loader.js" type="module"></script>
     <script src="scripts/core/network.js"></script>
 </body>

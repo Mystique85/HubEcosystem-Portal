@@ -1,0 +1,239 @@
+/* components/modals/gm-modal/gm-modal.css */
+.gm-popover-container {
+  animation: popoverFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gm-popover-content {
+  animation: popoverSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(0, 255, 136, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* GRUBE OBRAMOWANIE - TERAZ NA PEWNO WIDOCZNE */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(30, 30, 30, 0.95));
+  backdrop-filter: blur(20px);
+}
+
+/* USUWAMY ::before i robimy PROSTE OBRAMOWANIE */
+.gm-popover-border {
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.6),
+    rgba(139, 92, 246, 0.4),
+    rgba(59, 130, 246, 0.6)
+  );
+  background-size: 200% 200%;
+  animation: subtleBorderGlow 3s ease infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes subtleBorderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 1;
+  }
+}
+
+/* Arrow */
+.gm-popover-container::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.3), rgba(139, 92, 246, 0.2));
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: none;
+  border-right: none;
+  z-index: 60;
+}
+
+/* Subtelny glow zamiast neon pulse */
+.subtle-glow {
+  text-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.5),
+    0 0 40px rgba(0, 255, 136, 0.3);
+  animation: subtleTextGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes subtleTextGlow {
+  from {
+    text-shadow: 
+      0 0 20px rgba(0, 255, 136, 0.5),
+      0 0 40px rgba(0, 255, 136, 0.3);
+  }
+  to {
+    text-shadow: 
+      0 0 25px rgba(0, 255, 136, 0.7),
+      0 0 50px rgba(0, 255, 136, 0.4);
+  }
+}
+
+/* Gradient Text Hover */
+.gradient-text-hover {
+  background: linear-gradient(135deg, #00ff88, #8b5cf6, #3b82f6);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.5s ease;
+}
+
+.gradient-text-hover:hover {
+  background-position: 100% 50%;
+  transform: scale(1.05);
+}
+
+/* Highlight Magic */
+.highlight-magic {
+  position: relative;
+  color: transparent;
+  background: linear-gradient(135deg, #00ff88, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.highlight-magic::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff88;
+  z-index: -1;
+  filter: blur(3px);
+  opacity: 0.7;
+}
+
+/* Hover Scale */
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Floating Particles */
+.floating-particles {
+  z-index: 5;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+  background: #8b5cf6;
+}
+
+.particle:nth-child(3) {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 4s;
+  background: #3b82f6;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+}
+
+/* Button Ripple Effects */
+.enter-realm-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.enter-realm-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.enter-realm-btn:hover::before {
+  left: 100%;
+}
+
+.enter-realm-btn:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  animation: buttonRipple 0.6s ease-out;
+  border-radius: inherit;
+}
+
+@keyframes buttonRipple {
+  to {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Animations */
+@keyframes popoverFadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popoverSlideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Close button hover */
+.close-popover-btn:hover {
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
