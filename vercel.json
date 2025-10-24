@@ -1,5 +1,12 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "public",
-  "framework": null
+  "outputDirectory": ".",
+  "framework": "vite",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
 }
