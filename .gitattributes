@@ -1,0 +1,14 @@
+# Wymuś LF dla plików SVG i innych tekstowych
+*.svg text eol=lf
+
+# Możesz też dodać HTML, CSS, JS
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+
+# Binaria (obrazy, fonty, PDF) – nie zmieniaj linii
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.pdf  binary
+
