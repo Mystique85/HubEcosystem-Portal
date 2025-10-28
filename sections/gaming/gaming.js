@@ -1,4 +1,4 @@
-class ProjectsCarousel {
+class GamingCarousel {
     constructor() {
         this.currentPage = 0;
         this.currentFilter = 'all';
@@ -11,7 +11,7 @@ class ProjectsCarousel {
         this.cardWidth = 276;
         this.gap = 32;
         
-        console.log('🔄 ProjectsCarousel constructor called');
+        console.log('🎮 GamingCarousel constructor called');
         
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
@@ -21,24 +21,24 @@ class ProjectsCarousel {
     }
 
     init() {
-        console.log('🔄 Initializing ProjectsCarousel...');
+        console.log('🎮 Initializing GamingCarousel...');
         setTimeout(() => this.initializeCarousel(), 500);
     }
 
     initializeCarousel() {
-        this.carousel = document.getElementById('projectsCarousel');
-        this.cards = Array.from(document.querySelectorAll('#projects .card'));
+        this.carousel = document.getElementById('gamingCarousel');
+        this.cards = Array.from(document.querySelectorAll('#gaming-projects .card'));
         this.filteredCards = [...this.cards];
         
-        console.log('🔍 Carousel elements:', {
+        console.log('🎮 Gaming carousel elements:', {
             carousel: !!this.carousel,
             cards: this.cards.length,
-            prevBtn: !!document.querySelector('#projects .carousel-prev'),
-            nextBtn: !!document.querySelector('#projects .carousel-next')
+            prevBtn: !!document.querySelector('#gaming-projects .carousel-prev'),
+            nextBtn: !!document.querySelector('#gaming-projects .carousel-next')
         });
         
         if (!this.carousel || this.cards.length === 0) {
-            console.log('⏳ No cards found, retrying...');
+            console.log('⏳ No gaming cards found, retrying...');
             setTimeout(() => this.initializeCarousel(), 500);
             return;
         }
@@ -49,16 +49,16 @@ class ProjectsCarousel {
         this.createMiniatures();
         this.isInitialized = true;
         
-        console.log('✅ ProjectsCarousel initialized successfully');
+        console.log('✅ GamingCarousel initialized successfully');
     }
 
     setupEventListeners() {
-        // Filter buttons - TYLKO w sekcji projects
-        const filterButtons = document.querySelectorAll('#projects .filter-btn');
+        // Filter buttons - TYLKO w sekcji gaming
+        const filterButtons = document.querySelectorAll('#gaming-projects .filter-btn');
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Reset TYLKO projects filters
+                // Reset TYLKO gaming filters
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active', 'bg-[#00ff88]', 'text-[#0a0a0a]');
                     btn.classList.add('bg-white/10', 'text-text-light');
@@ -72,9 +72,9 @@ class ProjectsCarousel {
             });
         });
 
-        // Carousel navigation - TYLKO w sekcji projects
-        const prevBtn = document.querySelector('#projects .carousel-prev');
-        const nextBtn = document.querySelector('#projects .carousel-next');
+        // Carousel navigation - TYLKO w sekcji gaming
+        const prevBtn = document.querySelector('#gaming-projects .carousel-prev');
+        const nextBtn = document.querySelector('#gaming-projects .carousel-next');
         
         if (prevBtn) {
             prevBtn.addEventListener('click', (e) => {
@@ -90,13 +90,27 @@ class ProjectsCarousel {
             });
         }
 
-        // Keyboard navigation
+        // Keyboard navigation - tylko dla gaming carousel
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') this.prevSlide();
-            if (e.key === 'ArrowRight') this.nextSlide();
+            // Sprawdź czy gaming carousel jest aktywny (widoczny na ekranie)
+            const gamingSection = document.getElementById('gaming-projects');
+            if (gamingSection && this.isElementInViewport(gamingSection)) {
+                if (e.key === 'ArrowLeft') this.prevSlide();
+                if (e.key === 'ArrowRight') this.nextSlide();
+            }
         });
 
         this.setupTouchEvents();
+    }
+
+    isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
     }
 
     setupResponsive() {
@@ -112,7 +126,7 @@ class ProjectsCarousel {
                 this.cardsPerView = 4;
             }
             
-            console.log(`📱 Cards per view: ${this.cardsPerView} (width: ${width}px)`);
+            console.log(`🎮 Gaming cards per view: ${this.cardsPerView} (width: ${width}px)`);
             
             this.currentPage = 0;
             this.updateCarousel();
@@ -153,7 +167,7 @@ class ProjectsCarousel {
     }
 
     filterProjects(filter) {
-        console.log('🔧 Filtering projects:', filter);
+        console.log('🎮 Filtering gaming projects:', filter);
         
         this.currentPage = 0;
         
@@ -172,14 +186,14 @@ class ProjectsCarousel {
             });
         }
         
-        console.log(`📊 Filtered cards: ${this.filteredCards.length}`);
+        console.log(`🎮 Filtered gaming cards: ${this.filteredCards.length}`);
         this.updateCarousel();
         this.createMiniatures();
     }
 
     updateCarousel() {
         if (!this.carousel || this.filteredCards.length === 0) {
-            console.warn('❌ Cannot update carousel - no carousel or filtered cards');
+            console.warn('❌ Cannot update gaming carousel - no carousel or filtered cards');
             return;
         }
 
@@ -190,7 +204,7 @@ class ProjectsCarousel {
         this.updateMiniatures();
         this.updateArrowVisibility();
         
-        console.log('🔄 Carousel updated:', {
+        console.log('🎮 Gaming carousel updated:', {
             currentPage: this.currentPage,
             translateX: translateX,
             totalPages: Math.ceil(this.filteredCards.length / this.cardsPerView)
@@ -198,8 +212,8 @@ class ProjectsCarousel {
     }
 
     updateArrowVisibility() {
-        const prevBtn = document.querySelector('#projects .carousel-prev');
-        const nextBtn = document.querySelector('#projects .carousel-next');
+        const prevBtn = document.querySelector('#gaming-projects .carousel-prev');
+        const nextBtn = document.querySelector('#gaming-projects .carousel-next');
         const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerView);
 
         if (prevBtn) {
@@ -214,27 +228,27 @@ class ProjectsCarousel {
     }
 
     createMiniatures() {
-        const miniaturesContainer = document.getElementById('carouselMiniatures');
-        console.log('🔍 Looking for miniatures container:', miniaturesContainer);
+        const miniaturesContainer = document.getElementById('gamingMiniatures');
+        console.log('🎮 Looking for gaming miniatures container:', miniaturesContainer);
         
         if (!miniaturesContainer) {
-            console.error('❌ Miniatures container NOT FOUND! Check HTML ID');
+            console.error('❌ Gaming miniatures container NOT FOUND! Check HTML ID');
             return;
         }
 
         const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerView);
-        console.log(`📄 Total pages for miniatures: ${totalPages}`);
+        console.log(`🎮 Total pages for gaming miniatures: ${totalPages}`);
         
         miniaturesContainer.innerHTML = '';
         this.miniatures = [];
 
         if (totalPages <= 1) {
             miniaturesContainer.style.display = 'none';
-            console.log('📦 Only one page - hiding miniatures');
+            console.log('🎮 Only one page - hiding gaming miniatures');
             return;
         } else {
             miniaturesContainer.style.display = 'flex';
-            console.log('🎴 Showing miniatures for', totalPages, 'pages');
+            console.log('🎮 Showing gaming miniatures for', totalPages, 'pages');
         }
 
         for (let i = 0; i < totalPages; i++) {
@@ -243,27 +257,36 @@ class ProjectsCarousel {
                 i === 0 ? 'border-accent-neon scale-110 shadow-lg shadow-accent-neon/30' : 'border-white/20'
             }`;
             
-            // Ustaw kolor tła w zależności od typu kart na tej stronie
+            // Ustaw kolor tła w zależności od typu kart gamingowych
             const pageCards = this.filteredCards.slice(i * this.cardsPerView, (i + 1) * this.cardsPerView);
             const cardTypes = pageCards.map(card => card.getAttribute('data-categories'));
             
             let bgColor = 'bg-accent-neon/20';
-            let iconClass = 'fas fa-rocket text-accent-neon text-xs';
+            let iconClass = 'fas fa-gamepad text-accent-neon text-xs';
             
-            if (cardTypes.some(type => type && type.includes('base'))) {
-                bgColor = 'bg-blue-500/20';
-                iconClass = 'fas fa-layer-group text-blue-400 text-xs';
-            } else if (cardTypes.some(type => type && type.includes('celo'))) {
-                bgColor = 'bg-yellow-500/20';
-                iconClass = 'fas fa-seedling text-yellow-400 text-xs';
-            } else if (cardTypes.some(type => type && type.includes('soon'))) {
+            if (cardTypes.some(type => type && type.includes('p2e'))) {
+                bgColor = 'bg-green-500/20';
+                iconClass = 'fas fa-coins text-green-400 text-xs';
+            } else if (cardTypes.some(type => type && type.includes('rpg'))) {
+                bgColor = 'bg-red-500/20';
+                iconClass = 'fas fa-sword text-red-400 text-xs';
+            } else if (cardTypes.some(type => type && type.includes('fantasy'))) {
+                bgColor = 'bg-indigo-500/20';
+                iconClass = 'fas fa-dragon text-indigo-400 text-xs';
+            } else if (cardTypes.some(type => type && type.includes('metaverse'))) {
                 bgColor = 'bg-purple-500/20';
-                iconClass = 'fas fa-clock text-purple-400 text-xs';
+                iconClass = 'fas fa-globe text-purple-400 text-xs';
+            } else if (cardTypes.some(type => type && type.includes('mobile'))) {
+                bgColor = 'bg-cyan-500/20';
+                iconClass = 'fas fa-mobile-alt text-cyan-400 text-xs';
+            } else if (cardTypes.some(type => type && type.includes('soon'))) {
+                bgColor = 'bg-blue-500/20';
+                iconClass = 'fas fa-clock text-blue-400 text-xs';
             }
             
             miniature.classList.add(bgColor);
             
-            // Dodaj ikonę
+            // Dodaj ikonę gamingową
             const icon = document.createElement('i');
             icon.className = iconClass;
             miniature.appendChild(icon);
@@ -273,10 +296,10 @@ class ProjectsCarousel {
             miniaturesContainer.appendChild(miniature);
             this.miniatures.push(miniature);
             
-            console.log(`➕ Created miniature ${i + 1} with class: ${bgColor}`);
+            console.log(`🎮 Created gaming miniature ${i + 1} with class: ${bgColor}`);
         }
         
-        console.log(`🎴 Successfully created ${this.miniatures.length} miniatures`);
+        console.log(`🎮 Successfully created ${this.miniatures.length} gaming miniatures`);
     }
 
     updateMiniatures() {
@@ -300,7 +323,7 @@ class ProjectsCarousel {
             this.updateCarousel();
         }
         
-        console.log('➡️ Next page:', this.currentPage + 1, '/', totalPages);
+        console.log('🎮➡️ Next gaming page:', this.currentPage + 1, '/', totalPages);
     }
 
     prevSlide() {
@@ -309,29 +332,29 @@ class ProjectsCarousel {
             this.updateCarousel();
         }
         
-        console.log('⬅️ Prev page:', this.currentPage + 1);
+        console.log('🎮⬅️ Prev gaming page:', this.currentPage + 1);
     }
 
     goToPage(pageIndex) {
         this.currentPage = pageIndex;
         this.updateCarousel();
-        console.log('🎯 Go to page:', pageIndex + 1);
+        console.log('🎮🎯 Go to gaming page:', pageIndex + 1);
     }
 }
 
-// Initialize carousel
+// Initialize gaming carousel
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 DOM ready - starting ProjectsCarousel...');
+    console.log('🎮 DOM ready - starting GamingCarousel...');
     
     setTimeout(() => {
-        window.projectsCarousel = new ProjectsCarousel();
-        console.log('🎯 ProjectsCarousel instance created');
+        window.gamingCarousel = new GamingCarousel();
+        console.log('🎮 GamingCarousel instance created');
     }, 1000);
 });
 
 if (document.readyState === 'complete') {
     setTimeout(() => {
-        window.projectsCarousel = new ProjectsCarousel();
-        console.log('🎯 ProjectsCarousel instance created (page already loaded)');
+        window.gamingCarousel = new GamingCarousel();
+        console.log('🎮 GamingCarousel instance created (page already loaded)');
     }, 1000);
 }

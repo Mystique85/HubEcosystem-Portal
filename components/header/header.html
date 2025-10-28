@@ -1,5 +1,6 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-primary-dark/90 backdrop-blur-md border-b border-white/10 py-3">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <!-- Logo -->
         <div class="nav-logo flex items-center gap-3">
             <img src="images/hub-logo.svg" alt="HUB Ecosystem" class="logo-image w-9 h-9 rounded-lg object-contain">
             <span class="text-lg font-mono font-semibold tracking-tight animate-gradient-shift bg-gradient-to-r from-accent-neon via-accent-purple to-accent-blue bg-clip-text text-transparent bg-[length:200%_auto]">
@@ -7,20 +8,240 @@
             </span>
         </div>
         
-        <ul class="nav-links flex gap-6 items-center list-none">
-            <li><a href="#projects" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Project Gallery</a></li>
-            <li><a href="#community" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Community</a></li>
-            <li><a href="#dokumentacja" class="text-text-light text-sm font-medium hover:text-accent-neon transition-colors px-3 py-2 rounded-lg hover:bg-white/10">Documentation</a></li>
-            <li>
-                <a href="#" class="nav-news-btn text-text-light text-sm font-medium bg-accent-blue/10 border border-accent-blue/30 hover:bg-accent-blue/20 hover:border-accent-blue transition-all px-3 py-2 rounded-lg flex items-center gap-2" id="newsBtn">
-                    <i class="fas fa-newspaper text-xs"></i> Crypto News
-                </a>
-            </li>
-            <li>
-                <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform px-4 py-2 rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2">
-                    SAY GM <i class="fas fa-hand-wave text-xs"></i>
-                </button>
-            </li>
-        </ul>
+        <!-- Desktop Navigation - POPRAWIONE: właściwa struktura -->
+        <div class="nav-desktop hidden md:flex items-center gap-12">
+            <!-- Menu przycisków - teraz z odpowiednim odstępem od logo -->
+            <ul class="nav-links flex items-center list-none" style="gap: 20px">
+                <!-- Ecosystem Dropdown -->
+                <li class="nav-dropdown relative">
+                    <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="ecosystem">
+                        Ecosystem <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
+                    </button>
+                    <div class="nav-dropdown-menu absolute top-full left-0 mt-2 w-80 bg-primary-dark/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl shadow-accent-neon/20 opacity-0 invisible transition-all duration-300 scale-95 origin-top-left z-50">
+                        <div class="p-2">
+                            <a href="#projects" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-layer-group text-accent-neon text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Projects Gallery</span>
+                                </div>
+                            </a>
+                            <a href="#gaming-projects" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-gamepad text-accent-purple text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Gaming Hub</span>
+                                </div>
+                            </a>
+                            <a href="#nft-showcase" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-images text-accent-blue text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">NFT Showcase</span>
+                                </div>
+                            </a>
+                            <a href="#partners" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-handshake text-green-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Partners</span>
+                                </div>
+                            </a>
+                            <a href="#analytics" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-chart-bar text-yellow-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Analytics</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Community Dropdown -->
+                <li class="nav-dropdown relative">
+                    <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="community">
+                        Community <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
+                    </button>
+                    <div class="nav-dropdown-menu absolute top-full left-0 mt-2 w-80 bg-primary-dark/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl shadow-accent-neon/20 opacity-0 invisible transition-all duration-300 scale-95 origin-top-left z-50">
+                        <div class="p-2">
+                            <a href="#community" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-users text-accent-neon text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Community Hub</span>
+                                </div>
+                            </a>
+                            <a href="#events" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-calendar text-accent-purple text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Events</span>
+                                </div>
+                            </a>
+                            <a href="#forum" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-comments text-accent-blue text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Forum</span>
+                                </div>
+                            </a>
+                            <a href="#governance" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-vote-yea text-green-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Governance</span>
+                                </div>
+                            </a>
+                            <a href="#social" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-share-nodes text-yellow-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Social Channels</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Resources Dropdown -->
+                <li class="nav-dropdown relative">
+                    <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="resources">
+                        Resources <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
+                    </button>
+                    <div class="nav-dropdown-menu absolute top-full left-0 mt-2 w-80 bg-primary-dark/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl shadow-accent-neon/20 opacity-0 invisible transition-all duration-300 scale-95 origin-top-left z-50">
+                        <div class="p-2">
+                            <a href="#documentation" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-book text-accent-neon text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Documentation</span>
+                                </div>
+                            </a>
+                            <a href="#tools" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-tools text-accent-purple text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Tools</span>
+                                </div>
+                            </a>
+                            <a href="#tutorials" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-graduation-cap text-accent-blue text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Tutorials</span>
+                                </div>
+                            </a>
+                            <a href="#api" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-code text-green-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">API Reference</span>
+                                </div>
+                            </a>
+                            <a href="#integrations" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-puzzle-piece text-yellow-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Integrations</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- News Button -->
+                <li>
+                    <a href="#" class="nav-news-btn text-text-light text-sm font-medium bg-accent-blue/10 border border-accent-blue/30 hover:bg-accent-blue/20 hover:border-accent-blue transition-all rounded-lg flex items-center gap-2 whitespace-nowrap" style="padding: 6px 10px" id="newsBtn">
+                        <i class="fas fa-newspaper text-xs"></i> News
+                    </a>
+                </li>
+            </ul>
+
+            <!-- GM Button - OSOBNY kontener -->
+            <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px">
+                SAY GM <i class="fas fa-hand-wave text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="nav-mobile-btn md:hidden text-text-light p-2 rounded-lg hover:bg-white/10 transition-colors" id="mobileMenuBtn">
+            <i class="fas fa-bars text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-mobile-menu fixed inset-0 bg-primary-dark/95 backdrop-blur-md z-40 opacity-0 invisible transition-all duration-300 md:hidden" id="mobileMenu">
+        <div class="container max-w-7xl mx-auto px-6 pt-24 pb-8">
+            <button class="nav-mobile-close absolute top-6 right-6 text-text-light p-2 rounded-lg hover:bg-white/10 transition-colors" id="mobileMenuClose">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="mobile-nav-content space-y-6">
+                <!-- Mobile Ecosystem -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="ecosystem">
+                        <span class="flex items-center gap-3">
+                            <i class="fas fa-cubes text-accent-neon"></i>
+                            Ecosystem
+                        </span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden space-y-2 py-2">
+                        <a href="#projects" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-layer-group text-accent-neon text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Projects Gallery</span>
+                        </a>
+                        <a href="#gaming-projects" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-gamepad text-accent-purple text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Gaming Hub</span>
+                        </a>
+                        <a href="#nft-showcase" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-images text-accent-blue text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>NFT Showcase</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Community -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="community">
+                        <span class="flex items-center gap-3">
+                            <i class="fas fa-users text-accent-neon"></i>
+                            Community
+                        </span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden space-y-2 py-2">
+                        <a href="#community" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-users text-accent-neon text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Community Hub</span>
+                        </a>
+                        <a href="#events" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-calendar text-accent-purple text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Events</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Resources -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="resources">
+                        <span class="flex items-center gap-3">
+                            <i class="fas fa-toolbox text-accent-neon"></i>
+                            Resources
+                        </span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="mobile-dropdown-content hidden space-y-2 py-2">
+                        <a href="#documentation" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-book text-accent-neon text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Documentation</span>
+                        </a>
+                        <a href="#tools" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-tools text-accent-purple text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Tools</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile News & GM -->
+                <div class="mobile-actions space-y-4 pt-6">
+                    <a href="#" class="mobile-nav-btn flex items-center justify-center gap-3 w-full bg-accent-blue/10 border border-accent-blue/30 hover:bg-accent-blue/20 text-text-light font-medium py-4 rounded-xl transition-all duration-300" id="mobileNewsBtn">
+                        <i class="fas fa-newspaper"></i>
+                        Crypto News
+                    </a>
+                    <button class="mobile-nav-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105">
+                        <i class="fas fa-hand-wave"></i>
+                        SAY GM
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>

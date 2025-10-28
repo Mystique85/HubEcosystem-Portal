@@ -46,12 +46,12 @@ class ComponentLoader {
     }
 
     async loadPageStructure() {
-        // NOWA KOLEJNOŚĆ: Header → Ticker → Projects
+        // NOWA KOLEJNOŚĆ: Header → Ticker → Projects → Gaming
         const sections = [
             'components/modals/gm-modal/gm-modal',
             'components/header/header',           // PIERWSZE: Header
-            'components/ticker/ticker',           // DRUGIE: Ticker  
             'sections/projects/projects',         // TRZECIE: Projects
+            'sections/gaming/gaming',             // CZWARTE: Gaming ← DODANE
             'components/sidebar/sidebar',
             'sections/about-project/about-project',
             'sections/community/community',
@@ -69,7 +69,7 @@ class ComponentLoader {
             placeholder.style.display = 'none';
         }
 
-        console.log('🎯 ALL SECTIONS LOADED - Nowa kolejność: Header → Ticker → Projects');
+        console.log('🎯 ALL SECTIONS LOADED - Nowa kolejność: Header → Ticker → Projects → Gaming');
         
         this.initializeComponents();
     }
@@ -166,3 +166,41 @@ class ComponentLoader {
 // Initialize loader
 const loader = new ComponentLoader();
 loader.initialize();
+
+// scripts/core/loader.js - DODAJ PRZED OSTATNIĄ LINIĘ:
+
+// Debug: Sprawdź finalną strukturę po załadowaniu
+setTimeout(() => {
+    console.log('🔍 FINAL STRUCTURE CHECK:');
+    const mainContent = document.getElementById('mainContent');
+    const allSections = mainContent.querySelectorAll('section');
+    
+    console.log(`📊 Total sections loaded: ${allSections.length}`);
+    
+    allSections.forEach((section, index) => {
+        console.log(`🏷️  Section ${index + 1}:`, {
+            id: section.id,
+            className: section.className,
+            visible: section.offsetParent !== null,
+            children: section.children.length
+        });
+    });
+    
+    // Sprawdź konkretnie sekcje projects i gaming
+    const projectsSection = document.getElementById('projects');
+    const gamingSection = document.getElementById('gaming-projects');
+    
+    console.log('🎯 CRITICAL SECTIONS CHECK:', {
+        projects: {
+            exists: !!projectsSection,
+            visible: projectsSection ? projectsSection.offsetParent !== null : false,
+            children: projectsSection ? projectsSection.children.length : 0
+        },
+        gaming: {
+            exists: !!gamingSection, 
+            visible: gamingSection ? gamingSection.offsetParent !== null : false,
+            children: gamingSection ? gamingSection.children.length : 0
+        }
+    });
+    
+}, 2000);

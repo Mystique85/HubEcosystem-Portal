@@ -1695,23 +1695,6 @@ video {
   }
 }
 
-.mouse-follower {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: #00ff88;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-body:hover .mouse-follower {
-  opacity: 0.7;
-}
-
 .hello-celo-gradient {
   background: linear-gradient(135deg, #fccc05, #ff6b00, #ff0080) !important;
   -webkit-background-clip: text !important;
@@ -2297,4 +2280,300 @@ body:hover .mouse-follower {
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* ===== HEADER DROPDOWN STYLES ===== */
+
+/* Desktop Dropdown Animations */
+.nav-dropdown-menu {
+    transform: scale(0.95);
+    transform-origin: top left;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* Dropdown Item Hover Effects */
+.dropdown-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.dropdown-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.dropdown-item:hover::before {
+    left: 100%;
+}
+
+/* Mobile Menu Animations */
+.nav-mobile-menu {
+    transform: translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-mobile-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Mobile Dropdown Transitions */
+.mobile-dropdown-content {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Active State for Navigation */
+.nav-dropdown-btn.active {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+    
+    .nav-mobile-btn {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-mobile-btn {
+        display: none;
+    }
+    
+    .nav-mobile-menu {
+        display: none;
+    }
+}
+
+/* Scroll Spy Active State (for future implementation) */
+.nav-link.active {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+}
+
+/* Dropdown Arrow Animations */
+.nav-dropdown-btn i {
+    transition: transform 0.3s ease;
+}
+
+.mobile-dropdown-btn i.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+/* Ensure dropdowns are above other content */
+.nav-dropdown-menu {
+    z-index: 1000;
+}
+
+.nav-mobile-menu {
+    z-index: 999;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+    
+    .nav-mobile-btn {
+        display: block;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+    .nav-desktop {
+        display: flex;
+    }
+    
+    .nav-mobile-btn {
+        display: none;
+    }
+}
+
+/* Dropdown show state */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* ZACHOWANE STYLE - tylko te które są potrzebne: */
+
+/* Dropdown show states */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+.nav-dropdown-btn.active i {
+    transform: rotate(180deg) !important;
+}
+
+/* Mobile menu show state */
+.nav-mobile-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 🔥 Neonowa paleta dla tagów */
+
+.card-tag.p2e {
+  background-color: rgba(0, 255, 153, 0.18); /* neon green bg */
+  color: #00ff99; /* neon green text */
+}
+
+.card-tag.rpg {
+  background-color: rgba(255, 0, 92, 0.18); /* pinkish red bg */
+  color: #ff005c; /* neon pink/red text */
+}
+
+.card-tag.fantasy {
+  background-color: rgba(168, 85, 247, 0.18); /* neon purple bg */
+  color: #b43fff; /* neon purple text */
 }
