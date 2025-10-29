@@ -120,6 +120,14 @@ class ComponentLoader {
 
     async loadJS(jsPath) {
         return new Promise((resolve, reject) => {
+            // 🔥 DODANE: Sprawdź czy skrypt już istnieje - VERCEL FIX
+            const existingScript = document.querySelector(`script[src="${jsPath}"]`);
+            if (existingScript) {
+                console.log(`⚠️ Script already loaded: ${jsPath}`);
+                resolve();
+                return;
+            }
+            
             const script = document.createElement('script');
             script.src = jsPath;
             // POPRAWIONE: text/javascript zamiast module
@@ -130,6 +138,8 @@ class ComponentLoader {
                 resolve(); // Don't break loading if JS is missing
             };
             document.body.appendChild(script);
+            
+            console.log(`📦 Loading script: ${jsPath}`);
         });
     }
 
