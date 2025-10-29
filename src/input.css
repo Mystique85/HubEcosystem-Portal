@@ -415,3 +415,18 @@
 .carousel-miniature.bg-accent-neon\/20 {
     background: rgba(0, 255, 136, 0.2);
 }
+
+/* ===== DROPDOWN FIX - FINAL VERSION ===== */
+.nav-dropdown-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(0.95) !important;
+    display: block !important;
+}
+
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    display: block !important;
+}
