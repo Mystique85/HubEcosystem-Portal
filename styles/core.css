@@ -2610,3 +2610,66 @@ li.nav-dropdown:hover .nav-dropdown-menu {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+/* ===== DROPDOWN EMERGENCY FIXES ===== */
+.nav-dropdown-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(0.95) !important;
+    display: block !important;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    pointer-events: auto !important;
+}
+
+/* Force show on hover as backup */
+.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    pointer-events: auto !important;
+}
+
+/* Active state for buttons */
+.nav-dropdown-btn.active {
+    color: #00ff88 !important;
+    background: rgba(0, 255, 136, 0.1) !important;
+}
+
+.nav-dropdown-btn.active i {
+    transform: rotate(180deg) !important;
+}
+
+/* Mobile menu fixes */
+.nav-mobile-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s ease !important;
+}
+
+.nav-mobile-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Z-index fixes to ensure dropdowns are on top */
+.nav-dropdown-menu {
+    z-index: 1000 !important;
+}
+
+.nav-mobile-menu {
+    z-index: 999 !important;
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.mobile-menu-open {
+    overflow: hidden !important;
+}
