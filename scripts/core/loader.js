@@ -101,7 +101,8 @@ class ComponentLoader {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
             script.src = jsPath;
-            script.type = 'module';
+            // POPRAWIONE: text/javascript zamiast module
+            script.type = 'text/javascript';
             script.onload = resolve;
             script.onerror = () => {
                 console.warn(`JS not found: ${jsPath}`);
@@ -166,8 +167,6 @@ class ComponentLoader {
 // Initialize loader
 const loader = new ComponentLoader();
 loader.initialize();
-
-// scripts/core/loader.js - DODAJ PRZED OSTATNIĄ LINIĘ:
 
 // Debug: Sprawdź finalną strukturę po załadowaniu
 setTimeout(() => {
