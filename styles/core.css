@@ -2605,3 +2605,8 @@ video {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+li.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
