@@ -13,14 +13,6 @@ class HeaderNavigation {
     setupDesktopDropdowns() {
         console.log('🔧 Setting up desktop dropdowns...');
         
-        // USUŃ STARE EVENT LISTENERS - VERCEL FIX
-        const oldButtons = document.querySelectorAll('.nav-dropdown-btn');
-        oldButtons.forEach(btn => {
-            const newBtn = btn.cloneNode(true);
-            btn.parentNode.replaceChild(newBtn, btn);
-        });
-        
-        // DODAJ EVENT LISTENERS DO ŚWIEŻYCH PRZYCISKÓW
         const freshButtons = document.querySelectorAll('.nav-dropdown-btn');
         
         freshButtons.forEach(btn => {
@@ -34,7 +26,6 @@ class HeaderNavigation {
                 const dropdownMenu = dropdown.querySelector('.nav-dropdown-menu');
                 const isOpen = dropdownMenu.classList.contains('show');
                 
-                // Zamknij wszystkie dropdowny
                 document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
                     menu.classList.remove('show');
                 });
@@ -42,7 +33,6 @@ class HeaderNavigation {
                     button.classList.remove('active');
                 });
                 
-                // Otwórz ten dropdown jeśli był zamknięty
                 if (!isOpen) {
                     dropdownMenu.classList.add('show');
                     btn.classList.add('active');
@@ -51,20 +41,19 @@ class HeaderNavigation {
             });
         });
         
-        // Zamknij dropdowny po kliknięciu gdzie indziej
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-dropdown')) {
-                document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
-                    menu.classList.remove('show');
-                });
-                document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                console.log('👆 All dropdowns closed');
-            }
+            const isDropdownButton = e.target.closest('.nav-dropdown-btn');
+            const isDropdownMenu = e.target.closest('.nav-dropdown-menu');
+            if (isDropdownButton || isDropdownMenu) return;
+            document.querySelectorAll('.nav-dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+            document.querySelectorAll('.nav-dropdown-btn.active').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            console.log('👆 All dropdowns closed (outside click)');
         });
         
-        // Zapobiegaj zamykaniu po kliknięciu w dropdown
         document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
             menu.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -91,24 +80,17 @@ class HeaderNavigation {
             }
         }
         
-        // Mobile dropdowns
         const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
         mobileDropdownBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const content = btn.nextElementSibling;
                 const isOpen = !content.classList.contains('hidden');
-                
-                // Close all mobile dropdowns
                 document.querySelectorAll('.mobile-dropdown-content').forEach(item => {
                     item.classList.add('hidden');
                 });
-                
-                // Rotate arrows
                 document.querySelectorAll('.mobile-dropdown-btn i.fa-chevron-down').forEach(icon => {
                     icon.style.transform = 'rotate(0deg)';
                 });
-                
-                // Open this one if was closed
                 if (!isOpen) {
                     content.classList.remove('hidden');
                     btn.querySelector('i.fa-chevron-down').style.transform = 'rotate(180deg)';
@@ -162,13 +144,11 @@ class HeaderNavigation {
     }
 }
 
-// Initialize header navigation
 function initializeHeader() {
     console.log('🚀 Initializing HeaderNavigation...');
     window.headerNavigation = new HeaderNavigation();
 }
 
-// Wait for DOM and dynamic content
 function waitForHeaderAndInitialize() {
     const maxAttempts = 10;
     let attempts = 0;
@@ -188,7 +168,6 @@ function waitForHeaderAndInitialize() {
     }, 200);
 }
 
-// Auto-start
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', waitForHeaderAndInitialize);
 } else {
