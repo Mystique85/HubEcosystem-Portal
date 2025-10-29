@@ -88,7 +88,7 @@
     </canvas>
     
     <!-- LAYOUT BOUNDARY INDICATOR -->
-
+    <div class="layout-boundary"></div>
     
     <!-- CONTENT CONTAINER -->
     <div class="content relative z-10 min-h-screen flex flex-col" id="mainContent">
@@ -100,5 +100,181 @@
 
     <script src="scripts/core/loader.js" type="module"></script>
     <script src="scripts/core/network.js"></script>
+    
+    <!-- EMERGENCY DROPDOWN FIX -->
+    <script>
+    // Emergency dropdown fix - działa nawet jeśli główny JS się nie załaduje
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚨 EMERGENCY FIX: DOM loaded, setting up dropdown fallback');
+        
+        function setupEmergencyDropdowns() {
+            console.log('🔧 EMERGENCY: Setting up emergency dropdown handlers');
+            
+            const dropdownBtns = document.querySelectorAll('.nav-dropdown-btn');
+            console.log(`🔧 EMERGENCY: Found ${dropdownBtns.length} dropdown buttons`);
+            
+            dropdownBtns.forEach(btn => {
+                // Usuń istniejące event listeners aby uniknąć duplikatów
+                btn.replaceWith(btn.cloneNode(true));
+            });
+
+            // Ponownie pobierz przyciski po klonowaniu
+            const freshButtons = document.querySelectorAll('.nav-dropdown-btn');
+            
+            freshButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('🚨 EMERGENCY: Dropdown clicked:', this.dataset.dropdown);
+                    
+                    const dropdown = this.closest('.nav-dropdown');
+                    const menu = dropdown.querySelector('.nav-dropdown-menu');
+                    const isOpen = menu.classList.contains('show');
+                    
+                    // Zamknij wszystkie dropdowny
+                    document.querySelectorAll('.nav-dropdown-menu').forEach(m => {
+                        m.classList.remove('show');
+                    });
+                    document.querySelectorAll('.nav-dropdown-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Otwórz aktualny jeśli był zamknięty
+                    if (!isOpen) {
+                        menu.classList.add('show');
+                        this.classList.add('active');
+                        console.log('✅ EMERGENCY: Dropdown opened');
+                    }
+                });
+            });
+            
+            // Zamknij dropdowny przy kliknięciu poza
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-dropdown-menu')) {
+                    document.querySelectorAll('.nav-dropdown-menu').forEach(m => {
+                        m.classList.remove('show');
+                    });
+                    document.querySelectorAll('.nav-dropdown-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    console.log('👆 EMERGENCY: All dropdowns closed (outside click)');
+                }
+            });
+            
+            // Zapobiegaj zamykaniu przy kliknięciu w dropdown menu
+            document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                menu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            console.log('✅ EMERGENCY FIX: Dropdown fallback setup complete');
+        }
+        
+        // Uruchom po krótkim opóźnieniu, aby główny JS miał szansę zadziałać
+        setTimeout(() => {
+            // Sprawdź czy główny system dropdownów działa
+            const testButton = document.querySelector('.nav-dropdown-btn');
+            if (testButton) {
+                console.log('🔍 EMERGENCY: Testing if main dropdown system works...');
+                
+                // Test: sprawdź czy kliknięcie działa
+                testButton.addEventListener('click', function() {
+                    console.log('✅ EMERGENCY: Main dropdown system is working');
+                }, { once: true });
+                
+                // Jeśli po 3 sekundach nie ma logu, uruchom emergency
+                setTimeout(() => {
+                    console.log('⚠️ EMERGENCY: Main dropdown system may not be working, activating fallback...');
+                    setupEmergencyDropdowns();
+                }, 3000);
+            } else {
+                console.log('❌ EMERGENCY: No dropdown buttons found');
+            }
+        }, 2000);
+        
+        // Dodatkowo: Hover fallback dla desktop
+        if (window.innerWidth >= 768) {
+            const dropdowns = document.querySelectorAll('.nav-dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', function() {
+                    const menu = this.querySelector('.nav-dropdown-menu');
+                    const btn = this.querySelector('.nav-dropdown-btn');
+                    if (menu && btn) {
+                        menu.classList.add('show');
+                        btn.classList.add('active');
+                    }
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    const menu = this.querySelector('.nav-dropdown-menu');
+                    const btn = this.querySelector('.nav-dropdown-btn');
+                    if (menu && btn) {
+                        // Małe opóźnienie dla lepszego UX
+                        setTimeout(() => {
+                            if (!this.matches(':hover')) {
+                                menu.classList.remove('show');
+                                btn.classList.remove('active');
+                            }
+                        }, 150);
+                    }
+                });
+            });
+            console.log('🖱️ EMERGENCY: Hover fallback activated for desktop');
+        }
+    });
+
+    // Fallback dla mobile menu
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('show');
+                    document.body.style.overflow = '';
+                });
+            }
+        }
+        
+        // Mobile dropdowns
+        const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+        mobileDropdownBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isOpen = !content.classList.contains('hidden');
+                
+                // Zamknij wszystkie inne
+                document.querySelectorAll('.mobile-dropdown-content').forEach(item => {
+                    if (item !== content) item.classList.add('hidden');
+                });
+                document.querySelectorAll('.mobile-dropdown-btn i.fa-chevron-down').forEach(icon => {
+                    if (icon !== this.querySelector('i.fa-chevron-down')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Przełącz aktualny
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    this.querySelector('i.fa-chevron-down').style.transform = 'rotate(180deg)';
+                } else {
+                    content.classList.add('hidden');
+                    this.querySelector('i.fa-chevron-down').style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        
+        console.log('📱 EMERGENCY: Mobile menu fallback activated');
+    });
+    </script>
 </body>
 </html>
