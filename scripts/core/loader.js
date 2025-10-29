@@ -61,6 +61,16 @@ class ComponentLoader {
         for (const section of sections) {
             await this.loadSection(section);
             console.log(`✅ Loaded: ${section}`);
+            
+            // SPECJALNA OBSŁUGA HEADERA - DROPDOWN FIX
+            if (section === 'components/header/header') {
+                console.log('🎯 SPECIAL: Header loaded, waiting for initialization...');
+                // Daj czas na renderowanie DOM
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Inicjalizuj header wielokrotnie dla pewności
+                this.initializeHeaderWithRetry();
+            }
         }
         
         // Hide loading placeholder
@@ -88,27 +98,6 @@ class ComponentLoader {
 
             // Load JS (if exists)
             await this.loadJS(`${sectionPath}.js`);
-
-            // 🔥 DODANE: Inicjalizacja header-a po załadowaniu
-            if (sectionPath === 'components/header/header') {
-                console.log('🎯 Header HTML loaded - initializing navigation...');
-                // Poczekaj chwilę i zainicjalizuj header
-                setTimeout(() => {
-                    if (typeof initializeHeader === 'function') {
-                        initializeHeader();
-                        console.log('✅ Header navigation initialized from loader');
-                    } else {
-                        console.log('⚠️ initializeHeader function not found yet, retrying...');
-                        // Spróbuj ponownie za 500ms
-                        setTimeout(() => {
-                            if (typeof initializeHeader === 'function') {
-                                initializeHeader();
-                                console.log('✅ Header navigation initialized on retry');
-                            }
-                        }, 500);
-                    }
-                }, 100);
-            }
 
             this.loadedComponents.add(sectionPath);
             
@@ -141,6 +130,89 @@ class ComponentLoader {
             
             console.log(`📦 Loading script: ${jsPath}`);
         });
+    }
+
+    // NOWA METODA: Inicjalizacja header-a z wielokrotnymi próbami
+    initializeHeaderWithRetry() {
+        let retries = 0;
+        const maxRetries = 5;
+        
+        const tryInitialize = () => {
+            retries++;
+            console.log(`🔄 HEADER INIT: Attempt ${retries}/${maxRetries}`);
+            
+            if (typeof initializeHeader === 'function') {
+                initializeHeader();
+                console.log('✅ HEADER INIT: Successfully initialized via loader');
+                return true;
+            } else if (window.initializeHeader) {
+                window.initializeHeader();
+                console.log('✅ HEADER INIT: Successfully initialized via window object');
+                return true;
+            } else {
+                console.log(`⚠️ HEADER INIT: initializeHeader not found, retrying...`);
+                if (retries < maxRetries) {
+                    setTimeout(tryInitialize, 500);
+                } else {
+                    console.log('❌ HEADER INIT: Failed after max retries, trying emergency init...');
+                    this.initializeHeaderEmergency();
+                }
+            }
+        };
+        
+        tryInitialize();
+    }
+
+    // NOWA METODA: Awaryjna inicjalizacja header-a
+    initializeHeaderEmergency() {
+        console.log('🚨 EMERGENCY: Manual header initialization');
+        
+        // Bezpośrednie ustawienie event listenerów
+        const dropdownButtons = document.querySelectorAll('.nav-dropdown-btn');
+        console.log(`🚨 EMERGENCY: Found ${dropdownButtons.length} dropdown buttons`);
+        
+        dropdownButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('🚨 EMERGENCY: Dropdown clicked');
+                
+                const dropdown = btn.closest('.nav-dropdown');
+                const dropdownMenu = dropdown.querySelector('.nav-dropdown-menu');
+                const isOpen = dropdownMenu.classList.contains('show');
+                
+                // Zamknij wszystkie dropdowny
+                document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                document.querySelectorAll('.nav-dropdown-btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                
+                // Otwórz aktualny
+                if (!isOpen) {
+                    dropdownMenu.classList.add('show');
+                    btn.classList.add('active');
+                    console.log('✅ EMERGENCY: Dropdown opened');
+                }
+            });
+        });
+        
+        // Zamknij przy kliknięciu poza
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-dropdown-menu')) {
+                document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                console.log('👆 EMERGENCY: All dropdowns closed');
+            }
+        });
+        
+        console.log('✅ EMERGENCY: Header dropdowns initialized manually');
     }
 
     initializeComponents() {
