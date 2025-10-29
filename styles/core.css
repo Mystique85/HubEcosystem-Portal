@@ -2592,3 +2592,16 @@ video {
     transform: scale(1) !important;
     display: block !important;
 }
+
+/* 🔥 FIX FOR VERCEL DROPDOWN VISIBILITY */
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* Dodatkowe zabezpieczenie */
+.nav-dropdown-menu[class*="show"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
