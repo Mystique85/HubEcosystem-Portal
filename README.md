@@ -12,7 +12,7 @@
 
 ## 🚀 Quick Links
 
-[![Website](https://img.shields.io/badge/🚀_Visit_Platform-HUB_Ecosystem-00ff88?style=for-the-badge&logo=vercel&logoColor=black)](https://hubecosystem-portal.vercel.app/#projects)
+[![Website](https://img.shields.io/badge/🚀_Visit_Platform-HUB_Ecosystem-00ff88?style=for-the-badge&logo=vercel&logoColor=black)](https://hub-ecosystem-portal.vercel.app/)
 [![Contract](https://img.shields.io/badge/📄_HUB_Token_Contract-8b5cf6?style=for-the-badge&logo=ethereum&logoColor=white)](https://basescan.org/address/0x58efde38ef2b12392bfb3dc4e503493c46636b3e)
 
 </div>
@@ -53,18 +53,28 @@
 
 ## 🚀 Featured Projects
 
-### 🔥 HelloCelo
-**Decentralized messaging dApp on Celo network** rewarding users with **$HC tokens** for every message.
+### 🔥 HUB Portal Chat
+HUB Portal is a revolutionary Web3 social platform on the Celo blockchain that combines real-time chat with a token reward system. Experience seamless wallet integration, beautiful design, and true digital ownership.
 
-**Features:**
-- 🎯 Token rewards for user activity
-- 🔒 Decentralized messaging protocol
-- 🌱 Celo blockchain integration
+### 💬 Intelligent Messaging System
+- **Public Chat** - Community conversations with instant delivery
+- **Private Messages** - Secure 1-on-1 conversations
+- **Real-time Synchronization** - Messages appear instantly across all devices
+- **Token Rewards** - Earn HC tokens for active participation
+
+### 👤 Digital Identity
+- **Persistent Profiles** - Custom nicknames with unique emoji avatars
+- **Online Status** - See who's active in real-time
+- **User Discovery** - Browse and connect with community members
+- **Profile Persistence** - Your identity stays with you forever
 
 **Links:** 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github)](https://github.com/Mystique85/HelloCeloV2)
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-00ff88?style=flat)](https://hello-celo-v2.vercel.app/)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=flat&logo=twitter)](https://x.com/HelloCelo_HC)
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github)](https://github.com/Mystique85/Hub-Portal-Chat)
+[![Live](https://img.shields.io/badge/🚀_Live-00ff88?style=flat)](https://hub-portal-chat.vercel.app)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=flat&logo=twitter)](https://x.com/HUB_Ecosystem)
+
+---
 
 ### 🗳️ HelloVote  
 **Anonymous voting platform** where community engagement pays off with **$VOTE tokens**.
@@ -86,11 +96,11 @@
 ### 🎯 HUB Ecosystem Portal
 **Visit our main platform to explore all projects and join the growing Web3 community.**
 
-[**🌐 Explore Platform**](https://hub-ecosystem.vercel.app)
+[**🌐 Explore Platform**](https://hub-ecosystem-portal.vercel.app/)
 
 ### 👥 Join Our Community
 
-[![Twitter](https://img.shields.io/badge/🐦_Twitter/X-Follow_Progress-1DA1F2?style=for-the-badge&logo=twitter)](https://x.com/BaseEngageHub)
+[![Twitter](https://img.shields.io/badge/🐦_Twitter/X-Follow_Progress-1DA1F2?style=for-the-badge&logo=twitter)](https://x.com/HUB_Ecosystem)
 [![Discord](https://img.shields.io/badge/💬_Discord-Join_Chat-5865F2?style=for-the-badge&logo=discord)](https://discord.gg/9d4VFb3J5s)
 [![GitHub](https://img.shields.io/badge/💻_GitHub-View_Code-181717?style=for-the-badge&logo=github)](https://github.com/Mystique85)
 
@@ -99,7 +109,7 @@
 ## 📈 Development Roadmap
 
 ### 🚧 Current Focus
-- 🔥 **HelloCelo V2** - Active development
+- 🔥 **HUB Portal Chat** - Active development
 - 🌐 **Platform Enhancements** - Ongoing improvements
 - 🤝 **Community Growth** - Building our first supporters
 
