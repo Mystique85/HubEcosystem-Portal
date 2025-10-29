@@ -1,8 +1,7 @@
-// Header Navigation with Dropdown Menu - DEBUG VERSION
+// Header Navigation with Dropdown Menu - FIXED VERSION
 class HeaderNavigation {
     constructor() {
         this.isMobileMenuOpen = false;
-        this.activeDropdown = null;
         console.log('🔧 HeaderNavigation constructor called');
         this.init();
     }
@@ -15,7 +14,6 @@ class HeaderNavigation {
         
         this.setupDesktopDropdowns();
         this.setupMobileMenu();
-        this.setupClickOutside();
         this.setupSmoothScroll();
         
         console.log('✅ Header Navigation initialized');
@@ -41,7 +39,7 @@ class HeaderNavigation {
             height: styles.height
         });
 
-        // Sprawdź czy header jest widoczny - NAPRAWIONY WARUNEK
+        // Sprawdź czy header jest widoczny
         const isVisible = styles.display !== 'none' && 
                          styles.visibility !== 'hidden' && 
                          parseFloat(styles.opacity) > 0 &&
@@ -61,66 +59,69 @@ class HeaderNavigation {
     }
 
     setupDesktopDropdowns() {
-        const dropdownBtns = document.querySelectorAll('.nav-dropdown-btn');
-        console.log('🔧 Setting up desktop dropdowns, found:', dropdownBtns.length);
+        console.log('🔧 Setting up desktop dropdowns...');
         
+        // Remove old buttons and add new ones (Vercel fix)
+        const dropdownBtns = document.querySelectorAll('.nav-dropdown-btn');
         dropdownBtns.forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+        
+        // Add listeners to fresh buttons
+        const freshButtons = document.querySelectorAll('.nav-dropdown-btn');
+        
+        freshButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
-                const dropdownType = btn.getAttribute('data-dropdown');
-                console.log('🖱️ Dropdown clicked:', dropdownType);
-                this.toggleDesktopDropdown(dropdownType, btn);
+                
+                console.log('🎯 Dropdown clicked:', btn.textContent.trim());
+                
+                const dropdown = btn.closest('.nav-dropdown');
+                const dropdownMenu = dropdown.querySelector('.nav-dropdown-menu');
+                
+                // Check if this dropdown is already open
+                const isOpen = dropdownMenu.classList.contains('show');
+                
+                // Close all dropdowns
+                document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                document.querySelectorAll('.nav-dropdown-btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                
+                // If not open - open it
+                if (!isOpen) {
+                    dropdownMenu.classList.add('show');
+                    btn.classList.add('active');
+                    console.log('✅ Dropdown opened:', btn.textContent.trim());
+                } else {
+                    console.log('❌ Dropdown closed:', btn.textContent.trim());
+                }
             });
         });
-    }
-
-    toggleDesktopDropdown(dropdownType, btn) {
-        console.log('🔧 Toggling dropdown:', dropdownType);
         
-        // Zamknij poprzedni dropdown jeśli jest otwarty
-        if (this.activeDropdown && this.activeDropdown !== dropdownType) {
-            this.closeDesktopDropdown();
-        }
-        
-        // NAPRAWIONE: Użyj closest do znalezienia menu dropdown
-        const dropdownMenu = btn.closest('.nav-dropdown').querySelector('.nav-dropdown-menu');
-        const dropdownBtn = document.querySelector(`[data-dropdown="${dropdownType}"]`);
-        
-        console.log('🔍 Dropdown elements:', { dropdownMenu, dropdownBtn });
-        
-        if (dropdownMenu && dropdownBtn) {
-            const isOpening = !dropdownMenu.classList.contains('show');
-            
-            if (isOpening) {
-                dropdownMenu.classList.add('show');
-                dropdownBtn.classList.add('active');
-                this.activeDropdown = dropdownType;
-                console.log('📂 Dropdown opened:', dropdownType);
-                console.log('🎯 Menu classes:', dropdownMenu.classList);
-            } else {
-                this.closeDesktopDropdown();
+        // Click anywhere else - close all dropdowns
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-dropdown')) {
+                document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                console.log('👆 Click outside - all dropdowns closed');
             }
-        } else {
-            console.error('❌ Dropdown elements not found!');
-        }
-    }
-
-    closeDesktopDropdown() {
-        if (this.activeDropdown) {
-            // NAPRAWIONE: Znajdź menu dropdown przez przycisk
-            const dropdownBtn = document.querySelector(`[data-dropdown="${this.activeDropdown}"]`);
-            const dropdownMenu = dropdownBtn?.closest('.nav-dropdown').querySelector('.nav-dropdown-menu');
-            
-            if (dropdownMenu) {
-                dropdownMenu.classList.remove('show');
-            }
-            if (dropdownBtn) {
-                dropdownBtn.classList.remove('active');
-            }
-            
-            console.log('📂 Dropdown closed:', this.activeDropdown);
-            this.activeDropdown = null;
-        }
+        });
+        
+        // Prevent closing when clicking inside dropdown menu
+        document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+            menu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
     }
 
     setupMobileMenu() {
@@ -133,27 +134,6 @@ class HeaderNavigation {
                 this.openMobileMenu();
             });
         }
-    }
-
-    setupClickOutside() {
-        console.log('🔧 Setting up click outside listeners');
-        
-        // NAPRAWIONE: Użyj setTimeout aby uniknąć natychmiastowego zamknięcia
-        document.addEventListener('click', () => {
-            setTimeout(() => {
-                if (this.activeDropdown) {
-                    console.log('👆 Click outside - closing dropdown:', this.activeDropdown);
-                    this.closeDesktopDropdown();
-                }
-            }, 10);
-        });
-
-        // Zapobiegaj zamykaniu gdy klikasz w dropdown
-        document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
-            menu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        });
     }
 
     setupSmoothScroll() {
@@ -177,8 +157,13 @@ class HeaderNavigation {
                         this.closeMobileMenu();
                     }
                     
-                    // Zamknij dropdowny
-                    this.closeDesktopDropdown();
+                    // Zamknij wszystkie dropdowny
+                    document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                    document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
                 }
             }
         });
@@ -231,7 +216,7 @@ setTimeout(() => {
 
 console.log('🔍 HEADER LOADING DEBUG END');
 
-// Initialize header navigation - NAPRAWIONE: Czekaj aż DOM będzie gotowy
+// Initialize header navigation
 function initializeHeader() {
     console.log('🚀 Initializing HeaderNavigation...');
     window.headerNavigation = new HeaderNavigation();
