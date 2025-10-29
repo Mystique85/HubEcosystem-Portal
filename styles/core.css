@@ -2577,3 +2577,18 @@ video {
   background-color: rgba(168, 85, 247, 0.18); /* neon purple bg */
   color: #b43fff; /* neon purple text */
 }
+
+/* ===== DROPDOWN FIX - FINAL VERSION ===== */
+.nav-dropdown-menu {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(0.95) !important;
+    display: block !important;
+}
+
+.nav-dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    display: block !important;
+}
