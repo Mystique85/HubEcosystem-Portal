@@ -89,6 +89,27 @@ class ComponentLoader {
             // Load JS (if exists)
             await this.loadJS(`${sectionPath}.js`);
 
+            // 🔥 DODANE: Inicjalizacja header-a po załadowaniu
+            if (sectionPath === 'components/header/header') {
+                console.log('🎯 Header HTML loaded - initializing navigation...');
+                // Poczekaj chwilę i zainicjalizuj header
+                setTimeout(() => {
+                    if (typeof initializeHeader === 'function') {
+                        initializeHeader();
+                        console.log('✅ Header navigation initialized from loader');
+                    } else {
+                        console.log('⚠️ initializeHeader function not found yet, retrying...');
+                        // Spróbuj ponownie za 500ms
+                        setTimeout(() => {
+                            if (typeof initializeHeader === 'function') {
+                                initializeHeader();
+                                console.log('✅ Header navigation initialized on retry');
+                            }
+                        }, 500);
+                    }
+                }, 100);
+            }
+
             this.loadedComponents.add(sectionPath);
             
         } catch (error) {
