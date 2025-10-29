@@ -13,20 +13,28 @@ class HeaderNavigation {
     setupDesktopDropdowns() {
         console.log('🔧 Setting up desktop dropdowns...');
         
-        const dropdownBtns = document.querySelectorAll('.nav-dropdown-btn');
+        // USUŃ STARE EVENT LISTENERS - VERCEL FIX
+        const oldButtons = document.querySelectorAll('.nav-dropdown-btn');
+        oldButtons.forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
         
-        dropdownBtns.forEach(btn => {
+        // DODAJ EVENT LISTENERS DO ŚWIEŻYCH PRZYCISKÓW
+        const freshButtons = document.querySelectorAll('.nav-dropdown-btn');
+        
+        freshButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                console.log('🎯 Dropdown clicked:', btn.textContent.trim());
+                console.log('🎯 MAIN CODE: Dropdown clicked');
                 
                 const dropdown = btn.closest('.nav-dropdown');
                 const dropdownMenu = dropdown.querySelector('.nav-dropdown-menu');
                 const isOpen = dropdownMenu.classList.contains('show');
                 
-                // Close all dropdowns first
+                // Zamknij wszystkie dropdowny
                 document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
                     menu.classList.remove('show');
                 });
@@ -34,16 +42,16 @@ class HeaderNavigation {
                     button.classList.remove('active');
                 });
                 
-                // If not open - open it
+                // Otwórz ten dropdown jeśli był zamknięty
                 if (!isOpen) {
                     dropdownMenu.classList.add('show');
                     btn.classList.add('active');
-                    console.log('✅ Dropdown opened:', btn.textContent.trim());
+                    console.log('✅ MAIN CODE: Dropdown opened');
                 }
             });
         });
         
-        // Close dropdowns when clicking outside
+        // Zamknij dropdowny po kliknięciu gdzie indziej
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.nav-dropdown')) {
                 document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
@@ -52,15 +60,18 @@ class HeaderNavigation {
                 document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
+                console.log('👆 All dropdowns closed');
             }
         });
         
-        // Prevent closing when clicking inside dropdown
+        // Zapobiegaj zamykaniu po kliknięciu w dropdown
         document.querySelectorAll('.nav-dropdown-menu').forEach(menu => {
             menu.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
         });
+        
+        console.log('✅ Desktop dropdowns setup completed');
     }
 
     setupMobileMenu() {
