@@ -246,7 +246,10 @@
                 }
             });
 
-            card.addEventListener('click', (e) => {
+            const clickHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const ignoredElements = ['A', 'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'];
                 const isIgnored = ignoredElements.some(selector => 
                     e.target.closest(selector) || e.target.tagName === selector
@@ -259,9 +262,19 @@
                 const projectId = this.getProjectIdFromCard(card);
                 if (projectId) {
                     console.log(`🎯 Kliknięto kartę: ${projectId}`);
-                    this.open(projectId);
+                    // Małe opóźnienie dla pewności, że event się zakończył
+                    requestAnimationFrame(() => this.open(projectId));
                 }
-            });
+            };
+
+            // Usuń stary event listener jeśli istnieje
+            if (card._clickHandler) {
+                card.removeEventListener('click', card._clickHandler);
+            }
+
+            // Zapisz referencję do handlera
+            card._clickHandler = clickHandler;
+            card.addEventListener('click', clickHandler);
 
             card._hasModalClickListener = true;
             return true;
@@ -361,26 +374,51 @@
                 return;
             }
 
+            // Zabezpieczenie przed wielokrotnym otwarciem
+            if (this._openingInProgress) {
+                console.log('⏳ Otwieranie modalu w trakcie...');
+                return;
+            }
+
+            this._openingInProgress = true;
+
+            // Jeśli modal jest już otwarty, zamknij go przed otwarciem nowego
             if (this.isOpen) {
                 this.close();
-                setTimeout(() => this.open(projectId), 300);
+                setTimeout(() => {
+                    this._openingInProgress = false;
+                    this.open(projectId);
+                }, 300);
                 return;
             }
 
             const projectData = this.getProjectData(projectId);
+            if (!projectData) {
+                console.error('❌ Brak danych projektu:', projectId);
+                this._openingInProgress = false;
+                return;
+            }
+
             this.projectData = projectData;
             this.renderModalContent();
             
             console.log('📂 Otwieram modal dla:', projectId);
             
-            // Pokaż modal
+            // Pokaż modal natychmiast
             this.overlay.style.display = 'flex';
+            this.overlay.style.opacity = '0';
+            
+            // Wymuszamy reflow przed dodaniem animacji
+            this.overlay.offsetHeight;
+            
+            this.isOpen = true;
+            this.overlay.style.opacity = '1';
+            document.body.style.overflow = 'hidden';
+            
             setTimeout(() => {
-                this.overlay.classList.add('active');
-                this.isOpen = true;
-                document.body.style.overflow = 'hidden';
+                this._openingInProgress = false;
                 console.log('✅ Modal otwarty');
-            }, 10);
+            }, 300);
         }
 
         renderModalContent() {
@@ -492,17 +530,22 @@
         }
 
         close() {
-            if (!this.isOpen) return;
+            if (!this.isOpen || this._closingInProgress) return;
             
+            this._closingInProgress = true;
             console.log('📂 Zamykam modal');
             
-            this.overlay.classList.remove('active');
+            // Ustawiamy opacity na 0 dla animacji
+            this.overlay.style.opacity = '0';
             this.isOpen = false;
             document.body.style.overflow = '';
             
             setTimeout(() => {
-                this.overlay.style.display = 'none';
-                console.log('✅ Modal zamknięty');
+                if (!this.isOpen) {  // Dodatkowe sprawdzenie
+                    this.overlay.style.display = 'none';
+                    console.log('✅ Modal zamknięty');
+                }
+                this._closingInProgress = false;
             }, 300);
         }
     }
