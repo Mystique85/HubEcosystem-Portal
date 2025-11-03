@@ -122,9 +122,21 @@
             this.overlay = document.getElementById(overlayId);
             
             // Ukryj modal na starcie
-            if (this.overlay) {
-                this.overlay.style.display = 'none';
+            if (this.overlay && this.modal) {
+                // Ustaw style overlaya
+                this.overlay.style.visibility = 'hidden';
                 this.overlay.style.opacity = '0';
+                this.overlay.style.pointerEvents = 'none';
+                this.overlay.style.display = 'flex';
+                
+                // Ustaw style kontenera modalu
+                this.modal.style.visibility = 'hidden';
+                this.modal.style.opacity = '0';
+                this.modal.style.transform = 'translateY(20px)';
+                
+                // Dodaj transition dla płynnej animacji
+                this.modal.style.transition = 'all 0.3s ease';
+                this.overlay.style.transition = 'all 0.3s ease';
             }
             
             console.log('✅ Struktura modala utworzona:', {
@@ -246,7 +258,10 @@
                 }
             });
 
-            card.addEventListener('click', (e) => {
+            const clickHandler = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const ignoredElements = ['A', 'BUTTON', 'INPUT', 'SELECT', 'TEXTAREA'];
                 const isIgnored = ignoredElements.some(selector => 
                     e.target.closest(selector) || e.target.tagName === selector
@@ -259,9 +274,19 @@
                 const projectId = this.getProjectIdFromCard(card);
                 if (projectId) {
                     console.log(`🎯 Kliknięto kartę: ${projectId}`);
-                    this.open(projectId);
+                    // Małe opóźnienie dla pewności, że event się zakończył
+                    requestAnimationFrame(() => this.open(projectId));
                 }
-            });
+            };
+
+            // Usuń stary event listener jeśli istnieje
+            if (card._clickHandler) {
+                card.removeEventListener('click', card._clickHandler);
+            }
+
+            // Zapisz referencję do handlera
+            card._clickHandler = clickHandler;
+            card.addEventListener('click', clickHandler);
 
             card._hasModalClickListener = true;
             return true;
@@ -361,26 +386,59 @@
                 return;
             }
 
+            // Zabezpieczenie przed wielokrotnym otwarciem
+            if (this._openingInProgress) {
+                console.log('⏳ Otwieranie modalu w trakcie...');
+                return;
+            }
+
+            this._openingInProgress = true;
+
+            // Jeśli modal jest już otwarty, zamknij go przed otwarciem nowego
             if (this.isOpen) {
                 this.close();
-                setTimeout(() => this.open(projectId), 300);
+                setTimeout(() => {
+                    this._openingInProgress = false;
+                    this.open(projectId);
+                }, 300);
                 return;
             }
 
             const projectData = this.getProjectData(projectId);
+            if (!projectData) {
+                console.error('❌ Brak danych projektu:', projectId);
+                this._openingInProgress = false;
+                return;
+            }
+
             this.projectData = projectData;
             this.renderModalContent();
             
             console.log('📂 Otwieram modal dla:', projectId);
             
-            // Pokaż modal
-            this.overlay.style.display = 'flex';
-            setTimeout(() => {
-                this.overlay.classList.add('active');
-                this.isOpen = true;
+            // Reset stanu modalu
+            this.isOpen = true; // Ustawiamy stan przed animacją
+            this.overlay.style.pointerEvents = 'auto';
+            
+            requestAnimationFrame(() => {
+                // Najpierw ustaw style overlaya
+                this.overlay.style.visibility = 'visible';
+                this.overlay.style.opacity = '1';
+                
+                // Następnie ustaw style kontenera modalu
+                if (this.modal) {
+                    this.modal.style.visibility = 'visible';
+                    this.modal.style.opacity = '1';
+                    this.modal.style.transform = 'translateY(0)';
+                }
+                
                 document.body.style.overflow = 'hidden';
-                console.log('✅ Modal otwarty');
-            }, 10);
+                
+                setTimeout(() => {
+                    this._openingInProgress = false;
+                    console.log('✅ Modal otwarty');
+                }, 300);
+            });
         }
 
         renderModalContent() {
@@ -492,23 +550,36 @@
         }
 
         close() {
-            if (!this.isOpen) return;
+            if (!this.isOpen || this._closingInProgress) return;
             
+            this._closingInProgress = true;
             console.log('📂 Zamykam modal');
             
-            this.overlay.classList.remove('active');
+            // Rozpocznij animację zamykania
+            this.overlay.style.opacity = '0';
+            this.overlay.style.pointerEvents = 'none';
             this.isOpen = false;
             document.body.style.overflow = '';
             
+            // Poczekaj na zakończenie animacji
             setTimeout(() => {
-                this.overlay.style.display = 'none';
-                console.log('✅ Modal zamknięty');
+                if (!this.isOpen) {  // Dodatkowe sprawdzenie
+                    this.overlay.style.visibility = 'hidden';
+                    console.log('✅ Modal zamknięty');
+                }
+                this._closingInProgress = false;
             }, 300);
         }
     }
 
     // Eksport klasy
     window.ProjectModal = ProjectModal;
+
+    // Load debugger
+    const debuggerScript = document.createElement('script');
+    debuggerScript.src = 'components/modals/project-modal/modal-debugger.js';
+    debuggerScript.onload = () => console.log('✅ Modal debugger loaded');
+    document.head.appendChild(debuggerScript);
 
     // Inicjalizacja
     console.log('🚀 ProjectModal - inicjalizacja');
