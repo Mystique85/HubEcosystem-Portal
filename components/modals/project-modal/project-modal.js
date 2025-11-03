@@ -2,9 +2,7 @@
 (function() {
     'use strict';
 
-    // Zabezpieczenie przed duplikacją klasy
     if (window.ProjectModal) {
-        console.log('ℹ️ ProjectModal już załadowany');
         return;
     }
 
@@ -16,12 +14,8 @@
             this.projectData = {};
             this.initialized = false;
             
-            console.log('🔄 ProjectModal constructor called');
-            
-            // Automatyczne ładowanie CSS
             this.loadCSS();
             
-            // Inicjalizacja po załadowaniu DOM
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => this.safeInit());
             } else {
@@ -34,36 +28,27 @@
             const existingLink = document.querySelector(`link[href="${cssPath}"]`);
             
             if (existingLink) {
-                console.log('✅ ProjectModal CSS już załadowany');
                 return;
             }
             
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = cssPath;
-            link.onload = () => console.log('✅ ProjectModal CSS załadowany automatycznie');
-            link.onerror = () => console.warn('⚠️ ProjectModal CSS nie mógł zostać załadowany');
             document.head.appendChild(link);
         }
 
         safeInit() {
             if (this.initialized) {
-                console.log('ℹ️ ProjectModal już zainicjalizowany');
                 return;
             }
             
             try {
-                console.log('🔄 Rozpoczynam bezpieczną inicjalizację ProjectModal...');
                 this.createModalStructure();
                 this.setupEventListeners();
                 this.integrateWithProjects();
                 this.initialized = true;
-                console.log('✅ ProjectModal bezpiecznie zainicjalizowany');
             } catch (error) {
-                console.error('❌ Błąd inicjalizacji ProjectModal:', error);
-                // Retry after delay
                 setTimeout(() => {
-                    console.log('🔄 Ponowna próba inicjalizacji ProjectModal...');
                     this.safeInit();
                 }, 500);
             }
@@ -73,7 +58,6 @@
             const overlayId = 'projectModalOverlay';
             const modalId = 'projectModal';
             
-            // USUŃ WSZYSTKIE ISTNIEJĄCE MODALE - NAPRAWA DUPLIKATÓW
             const existingOverlay = document.getElementById(overlayId);
             const existingModal = document.getElementById(modalId);
             const existingInstanceOverlay = document.getElementById('projectModalInstanceOverlay');
@@ -83,8 +67,6 @@
             if (existingModal) existingModal.remove();
             if (existingInstanceOverlay) existingInstanceOverlay.remove();
             if (existingInstanceModal) existingInstanceModal.remove();
-
-            console.log('🏗️ Tworzę strukturę modala od zera...');
 
             const modalHTML = `
                 <div class="project-modal-overlay" id="${overlayId}">
@@ -117,41 +99,27 @@
 
             document.body.insertAdjacentHTML('beforeend', modalHTML);
             
-            // Przypisz elementy do właściwości klasy
             this.modal = document.getElementById(modalId);
             this.overlay = document.getElementById(overlayId);
             
-            // Ukryj modal na starcie
             if (this.overlay && this.modal) {
-                // Ustaw style overlaya
                 this.overlay.style.visibility = 'hidden';
                 this.overlay.style.opacity = '0';
                 this.overlay.style.pointerEvents = 'none';
                 this.overlay.style.display = 'flex';
                 
-                // Ustaw style kontenera modalu
                 this.modal.style.visibility = 'hidden';
                 this.modal.style.opacity = '0';
                 this.modal.style.transform = 'translateY(20px)';
                 
-                // Dodaj transition dla płynnej animacji
                 this.modal.style.transition = 'all 0.3s ease';
                 this.overlay.style.transition = 'all 0.3s ease';
             }
-            
-            console.log('✅ Struktura modala utworzona:', {
-                modal: !!this.modal,
-                overlay: !!this.overlay
-            });
         }
 
         setupEventListeners() {
-            console.log('🎯 Ustawiam event listeners...');
-            
-            // Close button - BEZPOŚREDNIO I NATYCHMIASTOWO
             const closeBtn = document.getElementById('modalCloseBtn');
             if (closeBtn) {
-                // Usuń istniejące event listeners
                 closeBtn.replaceWith(closeBtn.cloneNode(true));
                 const newCloseBtn = document.getElementById('modalCloseBtn');
                 
@@ -159,33 +127,23 @@
                     e.preventDefault();
                     e.stopPropagation();
                     e.stopImmediatePropagation();
-                    console.log('❌ Close button clicked');
                     this.close();
                 });
-                console.log('✅ Close button listener set');
             }
 
-            // Overlay click
             if (this.overlay) {
                 this.overlay.addEventListener('click', (e) => {
                     if (e.target === this.overlay) {
-                        console.log('🎯 Overlay clicked - closing modal');
                         this.close();
                     }
                 });
-                console.log('✅ Overlay listener set');
             }
 
-            // ESC key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && this.isOpen) {
-                    console.log('⌨️ ESC pressed - closing modal');
                     this.close();
                 }
             });
-            console.log('✅ ESC listener set');
-
-            console.log('🎯 Wszystkie event listeners ustawione');
         }
 
         integrateWithProjects() {
@@ -200,7 +158,6 @@
                 attempts++;
                 
                 if (window.projectsCarousel && window.projectsCarousel.isInitialized) {
-                    console.log('✅ ProjectsCarousel znaleziony, ustawiam klikalne karty...');
                     this.makeCardsClickable();
                     return;
                 }
@@ -208,7 +165,6 @@
                 if (attempts < maxAttempts) {
                     setTimeout(checkCarousel, 300);
                 } else {
-                    console.warn('⚠️ ProjectsCarousel nie znaleziony, próbuję ustawić karty bez niego...');
                     this.makeCardsClickable();
                 }
             };
@@ -219,7 +175,6 @@
         makeCardsClickable() {
             try {
                 const cards = document.querySelectorAll('#projects .card');
-                console.log(`🖱️ Ustawiam klikalność dla ${cards.length} kart`);
                 
                 let clickableCards = 0;
                 cards.forEach((card, index) => {
@@ -227,10 +182,8 @@
                         clickableCards++;
                     }
                 });
-                
-                console.log(`✅ ${clickableCards} kart zostało klikalnych`);
             } catch (error) {
-                console.error('❌ Błąd ustawiania klikalności kart:', error);
+                console.error('Error setting card clickability:', error);
             }
         }
 
@@ -273,18 +226,14 @@
 
                 const projectId = this.getProjectIdFromCard(card);
                 if (projectId) {
-                    console.log(`🎯 Kliknięto kartę: ${projectId}`);
-                    // Małe opóźnienie dla pewności, że event się zakończył
                     requestAnimationFrame(() => this.open(projectId));
                 }
             };
 
-            // Usuń stary event listener jeśli istnieje
             if (card._clickHandler) {
                 card.removeEventListener('click', card._clickHandler);
             }
 
-            // Zapisz referencję do handlera
             card._clickHandler = clickHandler;
             card.addEventListener('click', clickHandler);
 
@@ -315,46 +264,46 @@
                 'talent-protocol': {
                     id: 'talent-protocol',
                     title: 'TALENT PROTOCOL',
-                    subtitle: 'Twoja Reputacja w Świecie Web3',
+                    subtitle: 'Your Web3 Reputation',
                     logo: 'images/talent.logo.svg',
                     
                     sections: [
                         {
-                            title: 'CZYM JEST TALENT PROTOCOL?',
+                            title: 'WHAT IS TALENT PROTOCOL?',
                             icon: '🎯',
-                            content: `Talent Protocol to platforma, która zmienia sposób, w jaki developerzy i twórcy prezentują swoją pracę w świecie Web3. Działa jak cyfrowy paszport zawodowy, który automatycznie aktualizuje się z Twoimi osiągnięciami na blockchainach, GitHubie i innych platformach. To nie jest statyczne CV - to żywy dowód Twoich umiejętności i wkładu w rozwój ekosystemu.`
+                            content: `Talent Protocol is a platform that changes how developers and creators present their work in the Web3 world. It works like a digital professional passport that automatically updates with your achievements on blockchains, GitHub, and other platforms. This is not a static CV - it's living proof of your skills and contributions to ecosystem development.`
                         },
                         {
-                            title: 'CO ZYSKUJESZ JAKO UŻYTKOWNIK?',
+                            title: 'WHAT DO YOU GAIN AS A USER?',
                             icon: '💫',
                             benefits: [
                                 {
                                     icon: '🏆',
-                                    title: 'WERYFIKOWALNA REPUTACJA',
-                                    description: 'Twój Builder Score pokazuje realny wpływ Twojej pracy. Projekty mogą łatwo zweryfikować Twoje umiejętności i doświadczenie.'
+                                    title: 'VERIFIABLE REPUTATION',
+                                    description: 'Your Builder Score shows the real impact of your work. Projects can easily verify your skills and experience.'
                                 },
                                 {
                                     icon: '💼',
-                                    title: 'DOSTĘP DO OKAZJI',
-                                    description: 'Otrzymuj zaproszenia do interesujących projektów, programów grantowych i możliwości współpracy dopasowanych do Twoich skills.'
+                                    title: 'ACCESS TO OPPORTUNITIES',
+                                    description: 'Receive invitations to interesting projects, grant programs, and collaboration opportunities tailored to your skills.'
                                 },
                                 {
                                     icon: '🌍',
-                                    title: 'GLOBALNA SPOŁECZNOŚĆ',
-                                    description: 'Dołącz do 11 milionów developerów budujących razem przyszłość pracy w Web3. Wymieniaj się doświadczeniami i współpracuj.'
+                                    title: 'GLOBAL COMMUNITY',
+                                    description: 'Join 11 million developers building the future of work in Web3 together. Exchange experiences and collaborate.'
                                 }
                             ]
                         }
                     ],
                     stats: [
-                        { number: "11M+", label: "Zaindeksowanych Developerów" },
-                        { number: "1M+", label: "Aktywnych Talent Passports" },
-                        { number: "40+", label: "Integracji z Platformami" }
+                        { number: "11M+", label: "Indexed Developers" },
+                        { number: "1M+", label: "Active Talent Passports" },
+                        { number: "40+", label: "Platform Integrations" }
                     ],
                     links: {
-                        primary: { text: "🎯 STWÓRZ SWÓJ TALENT PASSPORT", url: "https://talentprotocol.com" },
-                        secondary: { text: "📚 POZNAJ DOKUMENTACJĘ", url: "https://docs.talentprotocol.com" },
-                        community: { text: "💬 DOŁĄCZ DO DISCORD", url: "https://discord.gg/talentprotocol" }
+                        primary: { text: "🎯 CREATE YOUR TALENT PASSPORT", url: "https://talentprotocol.com" },
+                        secondary: { text: "📚 EXPLORE DOCUMENTATION", url: "https://docs.talentprotocol.com" },
+                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/talentprotocol" }
                     }
                 }
             };
@@ -366,35 +315,31 @@
                 logo: '',
                 sections: [
                     {
-                        title: 'INFORMACJA',
+                        title: 'INFORMATION',
                         icon: 'ℹ️',
-                        content: 'Szczegółowe informacje o tym projekcie wkrótce będą dostępne.'
+                        content: 'Detailed information about this project will be available soon.'
                     }
                 ],
                 stats: [],
                 links: {
-                    primary: { text: "🌐 STRONA GŁÓWNA", url: "#" },
-                    secondary: { text: "📚 DOKUMENTACJA", url: "#" },
-                    community: { text: "💬 SPOŁECZNOŚĆ", url: "#" }
+                    primary: { text: "🌐 HOME PAGE", url: "#" },
+                    secondary: { text: "📚 DOCUMENTATION", url: "#" },
+                    community: { text: "💬 COMMUNITY", url: "#" }
                 }
             };
         }
 
         open(projectId) {
             if (!this.initialized) {
-                console.warn('⚠️ Modal nie jest jeszcze zainicjalizowany');
                 return;
             }
 
-            // Zabezpieczenie przed wielokrotnym otwarciem
             if (this._openingInProgress) {
-                console.log('⏳ Otwieranie modalu w trakcie...');
                 return;
             }
 
             this._openingInProgress = true;
 
-            // Jeśli modal jest już otwarty, zamknij go przed otwarciem nowego
             if (this.isOpen) {
                 this.close();
                 setTimeout(() => {
@@ -406,7 +351,6 @@
 
             const projectData = this.getProjectData(projectId);
             if (!projectData) {
-                console.error('❌ Brak danych projektu:', projectId);
                 this._openingInProgress = false;
                 return;
             }
@@ -414,18 +358,13 @@
             this.projectData = projectData;
             this.renderModalContent();
             
-            console.log('📂 Otwieram modal dla:', projectId);
-            
-            // Reset stanu modalu
-            this.isOpen = true; // Ustawiamy stan przed animacją
+            this.isOpen = true;
             this.overlay.style.pointerEvents = 'auto';
             
             requestAnimationFrame(() => {
-                // Najpierw ustaw style overlaya
                 this.overlay.style.visibility = 'visible';
                 this.overlay.style.opacity = '1';
                 
-                // Następnie ustaw style kontenera modalu
                 if (this.modal) {
                     this.modal.style.visibility = 'visible';
                     this.modal.style.opacity = '1';
@@ -436,7 +375,6 @@
                 
                 setTimeout(() => {
                     this._openingInProgress = false;
-                    console.log('✅ Modal otwarty');
                 }, 300);
             });
         }
@@ -444,9 +382,6 @@
         renderModalContent() {
             const { title, subtitle, logo, sections, stats, links } = this.projectData;
 
-            console.log('🎨 Renderuję zawartość modala:', title);
-
-            // Ustaw header
             const titleEl = document.getElementById('modalTitle');
             const subtitleEl = document.getElementById('modalSubtitle');
             
@@ -462,14 +397,11 @@
                 logoImg.style.display = 'none';
             }
 
-            // Renderuj zawartość
             const contentEl = document.getElementById('modalContent');
             const actionsEl = document.getElementById('modalActions');
             
             if (contentEl) contentEl.innerHTML = this.generateContentHTML(sections, stats);
             if (actionsEl) actionsEl.innerHTML = this.generateActionsHTML(links);
-            
-            console.log('✅ Zawartość modala zrenderowana');
         }
 
         generateContentHTML(sections, stats) {
@@ -512,7 +444,7 @@
                     html += `<div class="project-modal-section">
                         <h3 class="project-modal-section-title">
                             <span>📊</span>
-                            STATYSTYKI
+                            STATISTICS
                         </h3>
                         <div class="project-modal-stats">`;
                     
@@ -530,8 +462,8 @@
 
                 return html;
             } catch (error) {
-                console.error('❌ Błąd generowania zawartości:', error);
-                return '<div class="project-modal-text">Błąd ładowania zawartości</div>';
+                console.error('Error generating content:', error);
+                return '<div class="project-modal-text">Error loading content</div>';
             }
         }
 
@@ -553,36 +485,27 @@
             if (!this.isOpen || this._closingInProgress) return;
             
             this._closingInProgress = true;
-            console.log('📂 Zamykam modal');
             
-            // Rozpocznij animację zamykania
             this.overlay.style.opacity = '0';
             this.overlay.style.pointerEvents = 'none';
             this.isOpen = false;
             document.body.style.overflow = '';
             
-            // Poczekaj na zakończenie animacji
             setTimeout(() => {
-                if (!this.isOpen) {  // Dodatkowe sprawdzenie
+                if (!this.isOpen) {
                     this.overlay.style.visibility = 'hidden';
-                    console.log('✅ Modal zamknięty');
                 }
                 this._closingInProgress = false;
             }, 300);
         }
     }
 
-    // Eksport klasy
     window.ProjectModal = ProjectModal;
 
-    // Load debugger
     const debuggerScript = document.createElement('script');
     debuggerScript.src = 'components/modals/project-modal/modal-debugger.js';
-    debuggerScript.onload = () => console.log('✅ Modal debugger loaded');
     document.head.appendChild(debuggerScript);
 
-    // Inicjalizacja
-    console.log('🚀 ProjectModal - inicjalizacja');
     window.projectModal = new ProjectModal();
 
 })();
