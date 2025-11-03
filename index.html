@@ -151,6 +151,11 @@
             
             // Zamknij dropdowny przy kliknięciu poza
             document.addEventListener('click', function(e) {
+                // Nie zamykaj dropdownów jeśli kliknięcie jest w modalu lub karcie projektu
+                if (e.target.closest('.project-modal-container') || e.target.closest('.card')) {
+                    return;
+                }
+                
                 if (!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-dropdown-menu')) {
                     document.querySelectorAll('.nav-dropdown-menu').forEach(m => {
                         m.classList.remove('show');
