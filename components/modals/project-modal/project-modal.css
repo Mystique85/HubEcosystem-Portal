@@ -1,4 +1,4 @@
-
+/* components/modals/project-modal/project-modal.css */
 .project-modal-overlay {
   position: fixed;
   top: 0;
@@ -8,16 +8,20 @@
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   z-index: 10000;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
 }
 
 .project-modal-overlay.active {
-  display: flex;
-  animation: fadeIn 0.3s ease;
+  visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .project-modal-container {
@@ -30,14 +34,14 @@
   overflow-y: auto;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
-  transform: scale(0.9);
+  transform: translateY(20px);
   opacity: 0;
   transition: all 0.3s ease;
   pointer-events: auto;
 }
 
 .project-modal-overlay.active .project-modal-container {
-  transform: scale(1);
+  transform: translateY(0);
   opacity: 1;
 }
 
@@ -228,7 +232,6 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
 }
-
 
 @media (max-width: 768px) {
   .project-modal-container {
