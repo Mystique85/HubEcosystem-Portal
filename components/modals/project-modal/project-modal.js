@@ -120,13 +120,9 @@
         setupEventListeners() {
             const closeBtn = document.getElementById('modalCloseBtn');
             if (closeBtn) {
-                closeBtn.replaceWith(closeBtn.cloneNode(true));
-                const newCloseBtn = document.getElementById('modalCloseBtn');
-                
-                newCloseBtn.addEventListener('click', (e) => {
+                closeBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                     this.close();
                 });
             }
@@ -305,6 +301,99 @@
                         secondary: { text: "📚 EXPLORE DOCUMENTATION", url: "https://docs.talentprotocol.com" },
                         community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/talentprotocol" }
                     }
+                },
+                'intract': {
+                    id: 'intract',
+                    title: 'INTRACT',
+                    subtitle: 'Web3 Quest Platform',
+                    logo: 'images/intract.logo.svg',
+                    
+                    sections: [
+                        {
+                            title: 'WHAT IS INTRACT?',
+                            icon: '🎮',
+                            content: `Intract is a leading Web3 quest platform that helps users discover and engage with new blockchain projects through gamified experiences. Complete quests, earn rewards, and explore the ecosystem in a fun and interactive way.`
+                        },
+                        {
+                            title: 'KEY FEATURES',
+                            icon: '🚀',
+                            benefits: [
+                                {
+                                    icon: '🏆',
+                                    title: 'GAMIFIED EXPERIENCE',
+                                    description: 'Complete quests and challenges to earn points and rewards while learning about new projects.'
+                                },
+                                {
+                                    icon: '💰',
+                                    title: 'REWARD SYSTEM',
+                                    description: 'Earn tokens, NFTs, and other rewards for your participation and engagement with projects.'
+                                },
+                                {
+                                    icon: '🌐',
+                                    title: 'ECOSYSTEM DISCOVERY',
+                                    description: 'Discover new projects and protocols across multiple blockchain ecosystems.'
+                                }
+                            ]
+                        }
+                    ],
+                    stats: [
+                        { number: "500K+", label: "Active Users" },
+                        { number: "1000+", label: "Projects" },
+                        { number: "50+", label: "Blockchains" }
+                    ],
+                    links: {
+                        primary: { text: "🎮 START QUESTS", url: "https://intract.io" },
+                        secondary: { text: "📚 DOCUMENTATION", url: "https://docs.intract.io" },
+                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/intract" }
+                    }
+                },
+                'look-hook': {
+                    id: 'look-hook',
+                    title: 'LOOK HOOK',
+                    subtitle: 'NFT Analytics Platform',
+                    logo: 'images/lookhook.logo.svg',
+                    
+                    sections: [
+                        {
+                            title: 'WHAT IS LOOK HOOK?',
+                            icon: '📊',
+                            content: `Look Hook provides advanced analytics and insights for NFT markets. Track sales, trends, and market data across multiple platforms to make informed investment decisions.`
+                        }
+                    ],
+                    stats: [
+                        { number: "50K+", label: "NFT Collections" },
+                        { number: "10M+", label: "Sales Tracked" },
+                        { number: "20+", label: "Marketplaces" }
+                    ],
+                    links: {
+                        primary: { text: "📊 EXPLORE ANALYTICS", url: "https://lookhook.com" },
+                        secondary: { text: "📚 API DOCS", url: "https://docs.lookhook.com" },
+                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/lookhook" }
+                    }
+                },
+                'hello-celo': {
+                    id: 'hello-celo',
+                    title: 'HELLO CELO',
+                    subtitle: 'Celo Ecosystem Onboarding',
+                    logo: 'images/celo.logo.svg',
+                    
+                    sections: [
+                        {
+                            title: 'WHAT IS HELLO CELO?',
+                            icon: '🌍',
+                            content: `Hello Celo is an onboarding platform designed to help users discover and participate in the Celo ecosystem. Learn about Celo protocols, earn rewards, and join the mobile-first blockchain revolution.`
+                        }
+                    ],
+                    stats: [
+                        { number: "1M+", label: "Users Onboarded" },
+                        { number: "100+", label: "Projects" },
+                        { number: "$10M+", label: "Rewards Distributed" }
+                    ],
+                    links: {
+                        primary: { text: "🌍 JOIN CELO", url: "https://celo.org" },
+                        secondary: { text: "📚 LEARN MORE", url: "https://docs.celo.org" },
+                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/celo" }
+                    }
                 }
             };
 
@@ -334,49 +423,35 @@
                 return;
             }
 
-            if (this._openingInProgress) {
-                return;
-            }
-
-            this._openingInProgress = true;
-
+            // Jeśli już otwarty, najpierw zamknij
             if (this.isOpen) {
                 this.close();
-                setTimeout(() => {
-                    this._openingInProgress = false;
-                    this.open(projectId);
-                }, 300);
+                setTimeout(() => this.open(projectId), 350);
                 return;
             }
 
             const projectData = this.getProjectData(projectId);
             if (!projectData) {
-                this._openingInProgress = false;
                 return;
             }
 
             this.projectData = projectData;
             this.renderModalContent();
             
+            // WAŻNE: Ustaw stan PRZED animacją
             this.isOpen = true;
-            this.overlay.style.pointerEvents = 'auto';
+            document.body.style.overflow = 'hidden';
             
-            requestAnimationFrame(() => {
-                this.overlay.style.visibility = 'visible';
-                this.overlay.style.opacity = '1';
-                
-                if (this.modal) {
-                    this.modal.style.visibility = 'visible';
-                    this.modal.style.opacity = '1';
-                    this.modal.style.transform = 'translateY(0)';
-                }
-                
-                document.body.style.overflow = 'hidden';
-                
-                setTimeout(() => {
-                    this._openingInProgress = false;
-                }, 300);
-            });
+            // Bezpośrednie ustawienie stylów
+            this.overlay.style.visibility = 'visible';
+            this.overlay.style.opacity = '1';
+            this.overlay.style.pointerEvents = 'auto';
+            this.overlay.style.display = 'flex';
+            
+            this.modal.style.visibility = 'visible';
+            this.modal.style.opacity = '1';
+            this.modal.style.transform = 'translateY(0)';
+            this.modal.style.display = 'block';
         }
 
         renderModalContent() {
@@ -482,29 +557,31 @@
         }
 
         close() {
-            if (!this.isOpen || this._closingInProgress) return;
+            if (!this.isOpen) return;
             
-            this._closingInProgress = true;
-            
+            // Bezpośrednie ustawienie stylów
             this.overlay.style.opacity = '0';
             this.overlay.style.pointerEvents = 'none';
+            
+            this.modal.style.opacity = '0';
+            this.modal.style.transform = 'translateY(20px)';
+            
+            // WAŻNE: Natychmiast zresetuj stan
             this.isOpen = false;
             document.body.style.overflow = '';
             
+            // Ukryj po animacji
             setTimeout(() => {
                 if (!this.isOpen) {
                     this.overlay.style.visibility = 'hidden';
+                    this.modal.style.visibility = 'hidden';
                 }
-                this._closingInProgress = false;
             }, 300);
         }
     }
 
     window.ProjectModal = ProjectModal;
 
-    const debuggerScript = document.createElement('script');
-    debuggerScript.src = 'components/modals/project-modal/modal-debugger.js';
-    document.head.appendChild(debuggerScript);
 
     window.projectModal = new ProjectModal();
 
