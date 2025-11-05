@@ -10,7 +10,6 @@ class ComponentLoader {
       document.addEventListener('click', this.createRippleEffect.bind(this));
       await this.loadPageStructure();
     } catch (error) {
-      console.error('Failed to initialize page:', error);
       this.showErrorState();
     }
   }
@@ -64,7 +63,6 @@ class ComponentLoader {
       const html = await htmlResponse.text();
       document.getElementById('mainContent').innerHTML += html;
       
-      // Załaduj CSS dla modali
       if (sectionPath.includes('modals/')) {
         await this.loadModalCSS(sectionPath);
       }
@@ -74,7 +72,7 @@ class ComponentLoader {
       }
       this.loadedComponents.add(sectionPath);
     } catch (error) {
-      console.warn(`Could not load ${sectionPath}:`, error);
+      // Kontynuuj ładowanie nawet jeśli sekcja się nie załaduje
     }
   }
 
@@ -89,14 +87,8 @@ class ComponentLoader {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = cssPath;
-      link.onload = () => { 
-        console.log(`✅ CSS loaded: ${cssPath}`);
-        resolve(); 
-      };
-      link.onerror = () => {
-        console.warn(`⚠️ CSS not found: ${cssPath}`);
-        resolve(); // Kontynuuj nawet jeśli CSS nie istnieje
-      };
+      link.onload = () => resolve();
+      link.onerror = () => resolve();
       document.head.appendChild(link);
     });
   }
@@ -106,7 +98,7 @@ class ComponentLoader {
       await this.loadProjectModalCSS();
       await this.loadJS('components/modals/project-modal/project-modal.js');
     } catch (error) {
-      console.error('❌ Failed to load ProjectModal:', error);
+      // Kontynuuj nawet jeśli modal projektu się nie załaduje
     }
   }
 
@@ -121,11 +113,8 @@ class ComponentLoader {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = cssPath;
-      link.onload = () => { resolve(); };
-      link.onerror = () => {
-        console.warn('⚠️ ProjectModal CSS not found, but continuing...');
-        resolve();
-      };
+      link.onload = () => resolve();
+      link.onerror = () => resolve();
       document.head.appendChild(link);
     });
   }
@@ -141,10 +130,7 @@ class ComponentLoader {
       script.src = jsPath;
       script.type = 'text/javascript';
       script.onload = resolve;
-      script.onerror = () => {
-        console.warn(`JS not found: ${jsPath}`);
-        resolve();
-      };
+      script.onerror = resolve;
       document.body.appendChild(script);
     });
   }
@@ -254,24 +240,3 @@ class ComponentLoader {
 
 const loader = new ComponentLoader();
 loader.initialize();
-
-setTimeout(() => {
-  const mainContent = document.getElementById('mainContent');
-  const allSections = mainContent ? mainContent.querySelectorAll('section') : [];
-  const projectsSection = document.getElementById('projects');
-  const gamingSection = document.getElementById('gaming-projects');
-
-  const _debugSilent = {
-    totalSections: allSections.length,
-    projects: {
-      exists: !!projectsSection,
-      visible: projectsSection ? projectsSection.offsetParent !== null : false,
-      children: projectsSection ? projectsSection.children.length : 0
-    },
-    gaming: {
-      exists: !!gamingSection,
-      visible: gamingSection ? gamingSection.offsetParent !== null : false,
-      children: gamingSection ? gamingSection.children.length : 0
-    }
-  };
-}, 2000);
