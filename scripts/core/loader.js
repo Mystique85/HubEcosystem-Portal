@@ -31,6 +31,7 @@ class ComponentLoader {
     const sections = [
       'components/modals/gm-modal/gm-modal',
       'components/header/header',
+      'components/modals/auth-modal/auth-modal',
       'sections/projects/projects',
       'sections/gaming/gaming',
       'components/sidebar/sidebar',
@@ -62,6 +63,12 @@ class ComponentLoader {
       if (!htmlResponse.ok) throw new Error(`HTML not found: ${sectionPath}`);
       const html = await htmlResponse.text();
       document.getElementById('mainContent').innerHTML += html;
+      
+      // Załaduj CSS dla modali
+      if (sectionPath.includes('modals/')) {
+        await this.loadModalCSS(sectionPath);
+      }
+      
       if (sectionPath !== 'components/modals/project-modal/project-modal') {
         await this.loadJS(`${sectionPath}.js`);
       }
@@ -69,6 +76,29 @@ class ComponentLoader {
     } catch (error) {
       console.warn(`Could not load ${sectionPath}:`, error);
     }
+  }
+
+  async loadModalCSS(modalPath) {
+    return new Promise((resolve, reject) => {
+      const cssPath = `${modalPath}.css`;
+      const existingLink = document.querySelector(`link[href="${cssPath}"]`);
+      if (existingLink) {
+        resolve();
+        return;
+      }
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = cssPath;
+      link.onload = () => { 
+        console.log(`✅ CSS loaded: ${cssPath}`);
+        resolve(); 
+      };
+      link.onerror = () => {
+        console.warn(`⚠️ CSS not found: ${cssPath}`);
+        resolve(); // Kontynuuj nawet jeśli CSS nie istnieje
+      };
+      document.head.appendChild(link);
+    });
   }
 
   async loadProjectModalJS() {
