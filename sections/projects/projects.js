@@ -53,12 +53,11 @@ class ProjectsCarousel {
     }
 
     setupEventListeners() {
-        // Filter buttons - TYLKO w sekcji projects
+        // Filter buttons
         const filterButtons = document.querySelectorAll('#projects .filter-btn');
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Reset TYLKO projects filters
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active', 'bg-[#00ff88]', 'text-[#0a0a0a]');
                     btn.classList.add('bg-white/10', 'text-text-light');
@@ -72,7 +71,7 @@ class ProjectsCarousel {
             });
         });
 
-        // Carousel navigation - TYLKO w sekcji projects
+        // Carousel navigation
         const prevBtn = document.querySelector('#projects .carousel-prev');
         const nextBtn = document.querySelector('#projects .carousel-next');
         
@@ -183,7 +182,6 @@ class ProjectsCarousel {
             return;
         }
 
-        // Oblicz przesunięcie na podstawie strony
         const translateX = -this.currentPage * (this.cardWidth + this.gap) * this.cardsPerView;
         
         this.carousel.style.transform = `translateX(${translateX}px)`;
@@ -243,7 +241,6 @@ class ProjectsCarousel {
                 i === 0 ? 'border-accent-neon scale-110 shadow-lg shadow-accent-neon/30' : 'border-white/20'
             }`;
             
-            // Ustaw kolor tła w zależności od typu kart na tej stronie
             const pageCards = this.filteredCards.slice(i * this.cardsPerView, (i + 1) * this.cardsPerView);
             const cardTypes = pageCards.map(card => card.getAttribute('data-categories'));
             
@@ -263,7 +260,6 @@ class ProjectsCarousel {
             
             miniature.classList.add(bgColor);
             
-            // Dodaj ikonę
             const icon = document.createElement('i');
             icon.className = iconClass;
             miniature.appendChild(icon);
