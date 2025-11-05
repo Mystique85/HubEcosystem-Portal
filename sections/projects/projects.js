@@ -11,8 +11,6 @@ class ProjectsCarousel {
         this.cardWidth = 276;
         this.gap = 32;
         
-        console.log('🔄 ProjectsCarousel constructor called');
-        
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
@@ -21,7 +19,6 @@ class ProjectsCarousel {
     }
 
     init() {
-        console.log('🔄 Initializing ProjectsCarousel...');
         setTimeout(() => this.initializeCarousel(), 500);
     }
 
@@ -30,15 +27,7 @@ class ProjectsCarousel {
         this.cards = Array.from(document.querySelectorAll('#projects .card'));
         this.filteredCards = [...this.cards];
         
-        console.log('🔍 Carousel elements:', {
-            carousel: !!this.carousel,
-            cards: this.cards.length,
-            prevBtn: !!document.querySelector('#projects .carousel-prev'),
-            nextBtn: !!document.querySelector('#projects .carousel-next')
-        });
-        
         if (!this.carousel || this.cards.length === 0) {
-            console.log('⏳ No cards found, retrying...');
             setTimeout(() => this.initializeCarousel(), 500);
             return;
         }
@@ -48,12 +37,9 @@ class ProjectsCarousel {
         this.updateCarousel();
         this.createMiniatures();
         this.isInitialized = true;
-        
-        console.log('✅ ProjectsCarousel initialized successfully');
     }
 
     setupEventListeners() {
-        // Filter buttons
         const filterButtons = document.querySelectorAll('#projects .filter-btn');
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -71,7 +57,6 @@ class ProjectsCarousel {
             });
         });
 
-        // Carousel navigation
         const prevBtn = document.querySelector('#projects .carousel-prev');
         const nextBtn = document.querySelector('#projects .carousel-next');
         
@@ -89,7 +74,6 @@ class ProjectsCarousel {
             });
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') this.prevSlide();
             if (e.key === 'ArrowRight') this.nextSlide();
@@ -110,8 +94,6 @@ class ProjectsCarousel {
             } else {
                 this.cardsPerView = 4;
             }
-            
-            console.log(`📱 Cards per view: ${this.cardsPerView} (width: ${width}px)`);
             
             this.currentPage = 0;
             this.updateCarousel();
@@ -152,8 +134,6 @@ class ProjectsCarousel {
     }
 
     filterProjects(filter) {
-        console.log('🔧 Filtering projects:', filter);
-        
         this.currentPage = 0;
         
         if (filter === 'all') {
@@ -171,14 +151,12 @@ class ProjectsCarousel {
             });
         }
         
-        console.log(`📊 Filtered cards: ${this.filteredCards.length}`);
         this.updateCarousel();
         this.createMiniatures();
     }
 
     updateCarousel() {
         if (!this.carousel || this.filteredCards.length === 0) {
-            console.warn('❌ Cannot update carousel - no carousel or filtered cards');
             return;
         }
 
@@ -187,12 +165,6 @@ class ProjectsCarousel {
         this.carousel.style.transform = `translateX(${translateX}px)`;
         this.updateMiniatures();
         this.updateArrowVisibility();
-        
-        console.log('🔄 Carousel updated:', {
-            currentPage: this.currentPage,
-            translateX: translateX,
-            totalPages: Math.ceil(this.filteredCards.length / this.cardsPerView)
-        });
     }
 
     updateArrowVisibility() {
@@ -213,26 +185,21 @@ class ProjectsCarousel {
 
     createMiniatures() {
         const miniaturesContainer = document.getElementById('carouselMiniatures');
-        console.log('🔍 Looking for miniatures container:', miniaturesContainer);
         
         if (!miniaturesContainer) {
-            console.error('❌ Miniatures container NOT FOUND! Check HTML ID');
             return;
         }
 
         const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerView);
-        console.log(`📄 Total pages for miniatures: ${totalPages}`);
         
         miniaturesContainer.innerHTML = '';
         this.miniatures = [];
 
         if (totalPages <= 1) {
             miniaturesContainer.style.display = 'none';
-            console.log('📦 Only one page - hiding miniatures');
             return;
         } else {
             miniaturesContainer.style.display = 'flex';
-            console.log('🎴 Showing miniatures for', totalPages, 'pages');
         }
 
         for (let i = 0; i < totalPages; i++) {
@@ -268,11 +235,7 @@ class ProjectsCarousel {
             
             miniaturesContainer.appendChild(miniature);
             this.miniatures.push(miniature);
-            
-            console.log(`➕ Created miniature ${i + 1} with class: ${bgColor}`);
         }
-        
-        console.log(`🎴 Successfully created ${this.miniatures.length} miniatures`);
     }
 
     updateMiniatures() {
@@ -295,8 +258,6 @@ class ProjectsCarousel {
             this.currentPage++;
             this.updateCarousel();
         }
-        
-        console.log('➡️ Next page:', this.currentPage + 1, '/', totalPages);
     }
 
     prevSlide() {
@@ -304,30 +265,22 @@ class ProjectsCarousel {
             this.currentPage--;
             this.updateCarousel();
         }
-        
-        console.log('⬅️ Prev page:', this.currentPage + 1);
     }
 
     goToPage(pageIndex) {
         this.currentPage = pageIndex;
         this.updateCarousel();
-        console.log('🎯 Go to page:', pageIndex + 1);
     }
 }
 
-// Initialize carousel
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 DOM ready - starting ProjectsCarousel...');
-    
     setTimeout(() => {
         window.projectsCarousel = new ProjectsCarousel();
-        console.log('🎯 ProjectsCarousel instance created');
     }, 1000);
 });
 
 if (document.readyState === 'complete') {
     setTimeout(() => {
         window.projectsCarousel = new ProjectsCarousel();
-        console.log('🎯 ProjectsCarousel instance created (page already loaded)');
     }, 1000);
 }

@@ -11,8 +11,6 @@ class GamingCarousel {
         this.cardWidth = 276;
         this.gap = 32;
         
-        console.log('🎮 GamingCarousel constructor called');
-        
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
         } else {
@@ -21,7 +19,6 @@ class GamingCarousel {
     }
 
     init() {
-        console.log('🎮 Initializing GamingCarousel...');
         setTimeout(() => this.initializeCarousel(), 500);
     }
 
@@ -30,15 +27,7 @@ class GamingCarousel {
         this.cards = Array.from(document.querySelectorAll('#gaming-projects .card'));
         this.filteredCards = [...this.cards];
         
-        console.log('🎮 Gaming carousel elements:', {
-            carousel: !!this.carousel,
-            cards: this.cards.length,
-            prevBtn: !!document.querySelector('#gaming-projects .carousel-prev'),
-            nextBtn: !!document.querySelector('#gaming-projects .carousel-next')
-        });
-        
         if (!this.carousel || this.cards.length === 0) {
-            console.log('⏳ No gaming cards found, retrying...');
             setTimeout(() => this.initializeCarousel(), 500);
             return;
         }
@@ -48,17 +37,13 @@ class GamingCarousel {
         this.updateCarousel();
         this.createMiniatures();
         this.isInitialized = true;
-        
-        console.log('✅ GamingCarousel initialized successfully');
     }
 
     setupEventListeners() {
-        // Filter buttons - TYLKO w sekcji gaming
         const filterButtons = document.querySelectorAll('#gaming-projects .filter-btn');
         filterButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Reset TYLKO gaming filters
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active', 'bg-[#00ff88]', 'text-[#0a0a0a]');
                     btn.classList.add('bg-white/10', 'text-text-light');
@@ -72,7 +57,6 @@ class GamingCarousel {
             });
         });
 
-        // Carousel navigation - TYLKO w sekcji gaming
         const prevBtn = document.querySelector('#gaming-projects .carousel-prev');
         const nextBtn = document.querySelector('#gaming-projects .carousel-next');
         
@@ -90,9 +74,7 @@ class GamingCarousel {
             });
         }
 
-        // Keyboard navigation - tylko dla gaming carousel
         document.addEventListener('keydown', (e) => {
-            // Sprawdź czy gaming carousel jest aktywny (widoczny na ekranie)
             const gamingSection = document.getElementById('gaming-projects');
             if (gamingSection && this.isElementInViewport(gamingSection)) {
                 if (e.key === 'ArrowLeft') this.prevSlide();
@@ -125,8 +107,6 @@ class GamingCarousel {
             } else {
                 this.cardsPerView = 4;
             }
-            
-            console.log(`🎮 Gaming cards per view: ${this.cardsPerView} (width: ${width}px)`);
             
             this.currentPage = 0;
             this.updateCarousel();
@@ -167,8 +147,6 @@ class GamingCarousel {
     }
 
     filterProjects(filter) {
-        console.log('🎮 Filtering gaming projects:', filter);
-        
         this.currentPage = 0;
         
         if (filter === 'all') {
@@ -186,29 +164,20 @@ class GamingCarousel {
             });
         }
         
-        console.log(`🎮 Filtered gaming cards: ${this.filteredCards.length}`);
         this.updateCarousel();
         this.createMiniatures();
     }
 
     updateCarousel() {
         if (!this.carousel || this.filteredCards.length === 0) {
-            console.warn('❌ Cannot update gaming carousel - no carousel or filtered cards');
             return;
         }
 
-        // Oblicz przesunięcie na podstawie strony
         const translateX = -this.currentPage * (this.cardWidth + this.gap) * this.cardsPerView;
         
         this.carousel.style.transform = `translateX(${translateX}px)`;
         this.updateMiniatures();
         this.updateArrowVisibility();
-        
-        console.log('🎮 Gaming carousel updated:', {
-            currentPage: this.currentPage,
-            translateX: translateX,
-            totalPages: Math.ceil(this.filteredCards.length / this.cardsPerView)
-        });
     }
 
     updateArrowVisibility() {
@@ -229,26 +198,21 @@ class GamingCarousel {
 
     createMiniatures() {
         const miniaturesContainer = document.getElementById('gamingMiniatures');
-        console.log('🎮 Looking for gaming miniatures container:', miniaturesContainer);
         
         if (!miniaturesContainer) {
-            console.error('❌ Gaming miniatures container NOT FOUND! Check HTML ID');
             return;
         }
 
         const totalPages = Math.ceil(this.filteredCards.length / this.cardsPerView);
-        console.log(`🎮 Total pages for gaming miniatures: ${totalPages}`);
         
         miniaturesContainer.innerHTML = '';
         this.miniatures = [];
 
         if (totalPages <= 1) {
             miniaturesContainer.style.display = 'none';
-            console.log('🎮 Only one page - hiding gaming miniatures');
             return;
         } else {
             miniaturesContainer.style.display = 'flex';
-            console.log('🎮 Showing gaming miniatures for', totalPages, 'pages');
         }
 
         for (let i = 0; i < totalPages; i++) {
@@ -257,7 +221,6 @@ class GamingCarousel {
                 i === 0 ? 'border-accent-neon scale-110 shadow-lg shadow-accent-neon/30' : 'border-white/20'
             }`;
             
-            // Ustaw kolor tła w zależności od typu kart gamingowych
             const pageCards = this.filteredCards.slice(i * this.cardsPerView, (i + 1) * this.cardsPerView);
             const cardTypes = pageCards.map(card => card.getAttribute('data-categories'));
             
@@ -286,7 +249,6 @@ class GamingCarousel {
             
             miniature.classList.add(bgColor);
             
-            // Dodaj ikonę gamingową
             const icon = document.createElement('i');
             icon.className = iconClass;
             miniature.appendChild(icon);
@@ -295,11 +257,7 @@ class GamingCarousel {
             
             miniaturesContainer.appendChild(miniature);
             this.miniatures.push(miniature);
-            
-            console.log(`🎮 Created gaming miniature ${i + 1} with class: ${bgColor}`);
         }
-        
-        console.log(`🎮 Successfully created ${this.miniatures.length} gaming miniatures`);
     }
 
     updateMiniatures() {
@@ -322,8 +280,6 @@ class GamingCarousel {
             this.currentPage++;
             this.updateCarousel();
         }
-        
-        console.log('🎮➡️ Next gaming page:', this.currentPage + 1, '/', totalPages);
     }
 
     prevSlide() {
@@ -331,30 +287,22 @@ class GamingCarousel {
             this.currentPage--;
             this.updateCarousel();
         }
-        
-        console.log('🎮⬅️ Prev gaming page:', this.currentPage + 1);
     }
 
     goToPage(pageIndex) {
         this.currentPage = pageIndex;
         this.updateCarousel();
-        console.log('🎮🎯 Go to gaming page:', pageIndex + 1);
     }
 }
 
-// Initialize gaming carousel
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎮 DOM ready - starting GamingCarousel...');
-    
     setTimeout(() => {
         window.gamingCarousel = new GamingCarousel();
-        console.log('🎮 GamingCarousel instance created');
     }, 1000);
 });
 
 if (document.readyState === 'complete') {
     setTimeout(() => {
         window.gamingCarousel = new GamingCarousel();
-        console.log('🎮 GamingCarousel instance created (page already loaded)');
     }, 1000);
 }
