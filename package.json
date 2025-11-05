@@ -15,7 +15,12 @@
     "type": "git",
     "url": "git+https://github.com/Mystique85/HubEcosystem-Portal.git"
   },
-  "keywords": ["web3", "blockchain", "ecosystem", "portal"],
+  "keywords": [
+    "web3",
+    "blockchain",
+    "ecosystem",
+    "portal"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -24,5 +29,10 @@
   "homepage": "https://github.com/Mystique85/HubEcosystem-Portal#readme",
   "devDependencies": {
     "tailwindcss": "^3.3.0"
+  },
+  "dependencies": {
+    "@walletconnect/web3-provider": "^1.8.0",
+    "ethers": "^6.15.0",
+    "web3modal": "^1.9.12"
   }
 }

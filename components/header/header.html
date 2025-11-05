@@ -143,10 +143,38 @@
                 </li>
             </ul>
 
-            <!-- GM Button - OSOBNY kontener -->
-            <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px">
-                SAY GM <i class="fas fa-hand-wave text-xs"></i>
-            </button>
+            <!-- PRZYCISKI AUTH - ZMIENIONE: teraz z dropdown menu dla user panel -->
+            <div class="nav-auth-buttons flex items-center gap-3">
+                <!-- Dla NIEZALOGOWANYCH: -->
+                <button class="nav-sign-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: none;" id="signBtn">
+                    SIGN <i class="fas fa-wallet text-xs"></i>
+                </button>
+                
+                <!-- Dla ZALOGOWANYCH: -->
+                <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: none;" id="gmBtn">
+                    SAY GM <i class="fas fa-hand-wave text-xs"></i>
+                </button>
+                
+                <!-- User Panel Dropdown -->
+                <div class="nav-dropdown relative">
+                    <button class="nav-user-btn text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 12px; display: none;" id="userPanelBtn">
+                        <i class="fas fa-user text-xs"></i> <span id="userAddress">0x...</span> <i class="fas fa-chevron-down text-xs opacity-70"></i>
+                    </button>
+                    <div class="nav-dropdown-menu absolute top-full right-0 mt-2 w-48 bg-primary-dark/95 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl shadow-accent-neon/20 opacity-0 invisible transition-all duration-300 scale-95 origin-top-right z-50">
+                        <div class="p-2">
+                            <div class="px-4 py-2 text-xs text-text-gray border-b border-white/10 mb-2">
+                                Connected: <span id="dropdownUserAddress">0x...</span>
+                            </div>
+                            <button class="dropdown-item flex items-center w-full px-4 py-3 rounded-xl text-text-light hover:bg-red-500/20 hover:text-red-400 transition-all duration-300 group" id="disconnectBtn">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-sign-out-alt text-red-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium">Disconnect</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -230,16 +258,29 @@
                     </div>
                 </div>
 
-                <!-- Mobile News & GM -->
-                <div class="mobile-actions space-y-4 pt-6">
-                    <a href="#" class="mobile-nav-btn flex items-center justify-center gap-3 w-full bg-accent-blue/10 border border-accent-blue/30 hover:bg-accent-blue/20 text-text-light font-medium py-4 rounded-xl transition-all duration-300" id="mobileNewsBtn">
-                        <i class="fas fa-newspaper"></i>
-                        Crypto News
-                    </a>
-                    <button class="mobile-nav-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105">
+                <!-- Mobile Auth Buttons -->
+                <div class="mobile-auth-buttons space-y-4 pt-6">
+                    <!-- Dla NIEZALOGOWANYCH: -->
+                    <button class="mobile-sign-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: none;" id="mobileSignBtn">
+                        <i class="fas fa-wallet"></i>
+                        SIGN IN
+                    </button>
+                    
+                    <!-- Dla ZALOGOWANYCH: -->
+                    <button class="mobile-gm-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: none;" id="mobileGmBtn">
                         <i class="fas fa-hand-wave"></i>
                         SAY GM
                     </button>
+                    <div class="mobile-user-section bg-white/5 rounded-xl p-4" style="display: none;" id="mobileUserSection">
+                        <div class="text-center mb-3">
+                            <div class="text-xs text-text-gray">Connected as:</div>
+                            <div class="text-sm font-mono" id="mobileUserAddress">0x...</div>
+                        </div>
+                        <button class="mobile-disconnect-btn flex items-center justify-center gap-3 w-full bg-red-500/20 text-red-400 font-medium py-3 rounded-lg transition-all duration-300 hover:bg-red-500/30" id="mobileDisconnectBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Disconnect Wallet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

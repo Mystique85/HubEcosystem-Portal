@@ -1,0 +1,71 @@
+<div class="auth-modal-overlay fixed inset-0 bg-black/70 backdrop-blur-md z-[100] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300" id="authModal">
+    <div class="auth-modal-container bg-primary-dark/95 border border-accent-neon/30 rounded-2xl shadow-2xl shadow-accent-neon/20 max-w-md w-full transform scale-95 transition-transform duration-300">
+        <!-- Header -->
+        <div class="auth-modal-header border-b border-white/10 p-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-accent-neon to-accent-purple flex items-center justify-center">
+                    <i class="fas fa-wallet text-primary-dark text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Secure Access</h3>
+                    <p class="text-text-gray text-sm mt-1">HUB Ecosystem</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="auth-modal-content p-6">
+            <div class="space-y-4">
+                <!-- Info Item 1 -->
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-shield-alt text-accent-neon text-sm mt-1"></i>
+                    <div>
+                        <h4 class="text-white font-medium text-sm">Secure Verification</h4>
+                        <p class="text-text-gray text-xs">Sign a message to prove wallet ownership</p>
+                    </div>
+                </div>
+
+                <!-- Info Item 2 -->
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-bolt text-accent-purple text-sm mt-1"></i>
+                    <div>
+                        <h4 class="text-white font-medium text-sm">Gas-Free</h4>
+                        <p class="text-text-gray text-xs">No transaction fees - only a signature</p>
+                    </div>
+                </div>
+
+                <!-- Info Item 3 -->
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-gem text-accent-blue text-sm mt-1"></i>
+                    <div>
+                        <h4 class="text-white font-medium text-sm">Exclusive Access</h4>
+                        <p class="text-text-gray text-xs">Unlock GM streaks and future features</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Note -->
+            <div class="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
+                <div class="flex items-start gap-2">
+                    <i class="fas fa-info-circle text-yellow-400 text-sm mt-0.5"></i>
+                    <p class="text-text-gray text-xs">
+                        <strong>Never share your private key!</strong> This signature only verifies your wallet ownership.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="auth-modal-actions border-t border-white/10 p-6">
+            <div class="flex gap-3">
+                <button class="auth-modal-cancel flex-1 bg-white/10 hover:bg-white/20 text-white py-3 px-4 rounded-xl font-medium transition-colors duration-200" id="authModalCancel">
+                    Cancel
+                </button>
+                <button class="auth-modal-confirm flex-1 bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 text-primary-dark py-3 px-4 rounded-xl font-bold transition-transform duration-200 shadow-lg shadow-accent-neon/30" id="authModalConfirm">
+                    <i class="fas fa-signature mr-2"></i>
+                    Continue to Sign
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+/* Auth Modal Styles - Poprawiona wersja */
+.auth-modal-overlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.auth-modal-container {
+    transform: scale(0.9) translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 10001;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-modal-overlay.show .auth-modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* Naprawienie wyglądu - żeby wszystko było widoczne */
+.auth-modal-header {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-modal-content {
+    background: transparent !important;
+}
+
+.auth-modal-actions {
+    background: transparent !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Animacje dla elementów info */
+.auth-modal-content .flex {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideInRight 0.3s ease forwards;
+}
+
+.auth-modal-content .flex:nth-child(1) { animation-delay: 0.1s; }
+.auth-modal-content .flex:nth-child(2) { animation-delay: 0.15s; }
+.auth-modal-content .flex:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsywność */
+@media (max-width: 640px) {
+    .auth-modal-overlay {
+        padding: 10px;
+    }
+    
+    .auth-modal-container {
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .auth-modal-actions {
+        flex-direction: column;
+    }
+    
+    .auth-modal-actions button {
+        flex: none;
+        width: 100%;
+    }
+    
+    .auth-modal-actions .flex {
+        gap: 10px;
+    }
+}
