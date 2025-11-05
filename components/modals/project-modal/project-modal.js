@@ -74,10 +74,6 @@
                         <div class="project-modal-header">
                             <div class="project-modal-logo-title">
                                 <img class="project-modal-logo" id="modalLogo" alt="Project Logo" onerror="this.style.display='none'">
-                                <div class="project-title-section">
-                                    <h2 class="project-modal-title" id="modalTitle">Loading Title...</h2>
-                                    <p class="project-modal-subtitle" id="modalSubtitle">Loading Subtitle...</p>
-                                </div>
                             </div>
                             <button class="project-modal-close" id="modalCloseBtn" aria-label="Close modal">
                                 <i class="fas fa-times"></i>
@@ -242,6 +238,7 @@
             if (!title) return null;
 
             const projectMap = {
+                'karma gap': 'karma-gap',
                 'talent protocol': 'talent-protocol',
                 'intract': 'intract', 
                 'look hook': 'look-hook',
@@ -257,11 +254,83 @@
 
         getProjectData(projectId) {
             const projects = {
+                'karma-gap': {
+                    id: 'karma-gap',
+                    title: 'KARMA GAP',
+                    subtitle: 'On-Chain Grant Accountability Protocol',
+                    logo: 'images/karma-gap.png',
+                    logoStyle: 'width: 200px; height: auto; max-height: 80px;',
+                    showTitleInHeader: false,
+                    
+                    sections: [
+                        {
+                            title: 'WHAT IS KARMA GAP?',
+                            icon: '🌱',
+                            content: `Karma GAP (Grantee Accountability Protocol) provides the foundational infrastructure for on-chain reputation in the grants ecosystem. It allows grantees to build a verifiable track record of their work and enables funders to measure impact with transparency and data-driven insights.
+
+The protocol addresses critical problems in the grant ecosystem: lack of standardized reporting, scattered information that's hard to track, and the inability for grantees to carry their reputation across different ecosystems and DAOs.`
+                        },
+                        {
+                            title: 'CORE SOLUTIONS & TECHNOLOGY',
+                            icon: '🚀',
+                            content: `Karma GAP leverages Ethereum Attestation Service (EAS) for on-chain reporting, allowing grantees to self-report progress and milestones directly on-chain. This creates permanent, tamper-resistant records of work that are accessible across the entire Web3 ecosystem.
+
+The protocol enables universal data access by storing grant-related data on-chain, reducing reliance on external links and manual tracking. This structured, permissionless data layer enables better analytics and tooling for the entire grants ecosystem.`
+                        },
+                        {
+                            title: 'KEY FEATURES & BENEFITS',
+                            icon: '💫',
+                            benefits: [
+                                {
+                                    icon: '📊',
+                                    title: 'ON-CHAIN REPUTATION BUILDING',
+                                    description: 'Grantees can establish verifiable track records that travel with them across different DAOs and ecosystems, eliminating the need to start from scratch with each new grant application.'
+                                },
+                                {
+                                    icon: '🌍',
+                                    title: 'PORTABLE REPUTATION PROFILES',
+                                    description: 'Build a unified reputation profile that showcases your complete grant history, progress updates, and milestone achievements across multiple ecosystems and funding programs.'
+                                },
+                                {
+                                    icon: '⚙️',
+                                    title: 'DEVELOPER-FRIENDLY INFRASTRUCTURE',
+                                    description: 'With the karma-gap-sdk, developers can build custom applications and analytics on top of standardized, structured on-chain grant data, enabling novel tools for impact analysis and grant evaluation.'
+                                },
+                                {
+                                    icon: '🔍',
+                                    title: 'TRANSPARENCY & ACCOUNTABILITY',
+                                    description: 'Grant programs and DAOs gain unprecedented visibility into how funds are being used, project progress, and outcomes, enabling data-driven capital allocation decisions.'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'ECOSYSTEM IMPACT & ADOPTION',
+                            icon: '📈',
+                            content: `Karma GAP is trusted by 25+ leading on-chain communities including Gitcoin, Optimism, Arbitrum, Moonbeam, and ENS. The platform has indexed 60,000+ delegates and tracks 2,000+ grants with 700+ grant updates recorded on-chain.
+
+The protocol represents a fundamental shift in how public goods funding and grant programs operate in Web3, moving from opaque, siloed reporting to transparent, verifiable, and interoperable reputation systems.`
+                        }
+                    ],
+                    stats: [
+                        { number: "2,000+", label: "Grants Tracked" },
+                        { number: "60,000+", label: "Delegates Indexed" },
+                        { number: "25+", label: "On-chain Communities" },
+                        { number: "700+", label: "Grant Updates" }
+                    ],
+                    links: {
+                        primary: { text: "🚀 Explore GAP Protocol", url: "https://gap.karmahq.xyz" },
+                        secondary: { text: "📚 Documentation", url: "https://docs.gap.karmahq.xyz" },
+                        community: { text: "💬 Join Discord", url: "https://discord.gg/karmahq" },
+                        twitter: { text: "🐦 Follow on X", url: "https://x.com/karmahq_" }
+                    }
+                },
                 'talent-protocol': {
                     id: 'talent-protocol',
                     title: 'TALENT PROTOCOL',
                     subtitle: 'Your Web3 Reputation',
                     logo: 'images/talent.logo.svg',
+                    logoStyle: 'width: 50px; height: 50px;',
+                    showTitleInHeader: true,
                     
                     sections: [
                         {
@@ -297,9 +366,10 @@
                         { number: "40+", label: "Platform Integrations" }
                     ],
                     links: {
-                        primary: { text: "🎯 CREATE YOUR TALENT PASSPORT", url: "https://talentprotocol.com" },
-                        secondary: { text: "📚 EXPLORE DOCUMENTATION", url: "https://docs.talentprotocol.com" },
-                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/talentprotocol" }
+                        primary: { text: "🎯 Create Your Talent Passport", url: "https://talentprotocol.com" },
+                        secondary: { text: "📚 Explore Documentation", url: "https://docs.talentprotocol.com" },
+                        community: { text: "💬 Join Discord", url: "https://discord.gg/talentprotocol" },
+                        twitter: { text: "🐦 Follow on X", url: "https://x.com/talentprotocol" }
                     }
                 },
                 'intract': {
@@ -307,6 +377,8 @@
                     title: 'INTRACT',
                     subtitle: 'Web3 Quest Platform',
                     logo: 'images/intract.logo.svg',
+                    logoStyle: 'width: 50px; height: 50px;',
+                    showTitleInHeader: true,
                     
                     sections: [
                         {
@@ -342,9 +414,10 @@
                         { number: "50+", label: "Blockchains" }
                     ],
                     links: {
-                        primary: { text: "🎮 START QUESTS", url: "https://intract.io" },
-                        secondary: { text: "📚 DOCUMENTATION", url: "https://docs.intract.io" },
-                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/intract" }
+                        primary: { text: "🎮 Start Quests", url: "https://intract.io" },
+                        secondary: { text: "📚 Documentation", url: "https://docs.intract.io" },
+                        community: { text: "💬 Join Discord", url: "https://discord.gg/intract" },
+                        twitter: { text: "🐦 Follow on X", url: "https://x.com/IntractQuests" }
                     }
                 },
                 'look-hook': {
@@ -352,6 +425,8 @@
                     title: 'LOOK HOOK',
                     subtitle: 'NFT Analytics Platform',
                     logo: 'images/lookhook.logo.svg',
+                    logoStyle: 'width: 50px; height: 50px;',
+                    showTitleInHeader: true,
                     
                     sections: [
                         {
@@ -366,9 +441,10 @@
                         { number: "20+", label: "Marketplaces" }
                     ],
                     links: {
-                        primary: { text: "📊 EXPLORE ANALYTICS", url: "https://lookhook.com" },
-                        secondary: { text: "📚 API DOCS", url: "https://docs.lookhook.com" },
-                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/lookhook" }
+                        primary: { text: "📊 Explore Analytics", url: "https://lookhook.com" },
+                        secondary: { text: "📚 API Docs", url: "https://docs.lookhook.com" },
+                        community: { text: "💬 Join Discord", url: "https://discord.gg/lookhook" },
+                        twitter: { text: "🐦 Follow on X", url: "https://x.com/HashCoinFarm" }
                     }
                 },
                 'hello-celo': {
@@ -376,6 +452,8 @@
                     title: 'HELLO CELO',
                     subtitle: 'Celo Ecosystem Onboarding',
                     logo: 'images/celo.logo.svg',
+                    logoStyle: 'width: 50px; height: 50px;',
+                    showTitleInHeader: true,
                     
                     sections: [
                         {
@@ -390,9 +468,10 @@
                         { number: "$10M+", label: "Rewards Distributed" }
                     ],
                     links: {
-                        primary: { text: "🌍 JOIN CELO", url: "https://celo.org" },
-                        secondary: { text: "📚 LEARN MORE", url: "https://docs.celo.org" },
-                        community: { text: "💬 JOIN DISCORD", url: "https://discord.gg/celo" }
+                        primary: { text: "🌍 Join Celo", url: "https://celo.org" },
+                        secondary: { text: "📚 Learn More", url: "https://docs.celo.org" },
+                        community: { text: "💬 Join Discord", url: "https://discord.gg/celo" },
+                        twitter: { text: "🐦 Follow on X", url: "https://x.com/HelloCelo_HC" }
                     }
                 }
             };
@@ -402,6 +481,8 @@
                 title: projectId.toUpperCase().replace('-', ' '),
                 subtitle: 'Project Details',
                 logo: '',
+                logoStyle: 'width: 50px; height: 50px;',
+                showTitleInHeader: true,
                 sections: [
                     {
                         title: 'INFORMATION',
@@ -411,9 +492,10 @@
                 ],
                 stats: [],
                 links: {
-                    primary: { text: "🌐 HOME PAGE", url: "#" },
-                    secondary: { text: "📚 DOCUMENTATION", url: "#" },
-                    community: { text: "💬 COMMUNITY", url: "#" }
+                    primary: { text: "🌐 Home Page", url: "#" },
+                    secondary: { text: "📚 Documentation", url: "#" },
+                    community: { text: "💬 Community", url: "#" },
+                    twitter: { text: "🐦 Follow on X", url: "#" }
                 }
             };
         }
@@ -423,7 +505,6 @@
                 return;
             }
 
-            // Jeśli już otwarty, najpierw zamknij
             if (this.isOpen) {
                 this.close();
                 setTimeout(() => this.open(projectId), 350);
@@ -438,11 +519,9 @@
             this.projectData = projectData;
             this.renderModalContent();
             
-            // WAŻNE: Ustaw stan PRZED animacją
             this.isOpen = true;
             document.body.style.overflow = 'hidden';
             
-            // Bezpośrednie ustawienie stylów
             this.overlay.style.visibility = 'visible';
             this.overlay.style.opacity = '1';
             this.overlay.style.pointerEvents = 'auto';
@@ -455,27 +534,43 @@
         }
 
         renderModalContent() {
-            const { title, subtitle, logo, sections, stats, links } = this.projectData;
+            const { title, subtitle, logo, logoStyle, showTitleInHeader, sections, stats, links } = this.projectData;
 
-            const titleEl = document.getElementById('modalTitle');
-            const subtitleEl = document.getElementById('modalSubtitle');
+            const contentEl = document.getElementById('modalContent');
+            let contentHTML = '';
             
-            if (titleEl) titleEl.textContent = title;
-            if (subtitleEl) subtitleEl.textContent = subtitle;
+            // Tytuł w content będzie wyświetlany TYLKO jeśli showTitleInHeader jest true
+            if (showTitleInHeader) {
+                contentHTML += `
+                    <div class="project-modal-section" style="margin-top: 0; padding-top: 0;">
+                        <h2 class="project-modal-main-title">${title}</h2>
+                        ${subtitle ? `<p class="project-modal-main-subtitle">${subtitle}</p>` : ''}
+                    </div>
+                `;
+            }
+            
+            contentHTML += this.generateContentHTML(sections, stats);
+            
+            if (contentEl) contentEl.innerHTML = contentHTML;
             
             const logoImg = document.getElementById('modalLogo');
             if (logoImg && logo) {
                 logoImg.src = logo;
                 logoImg.alt = title;
                 logoImg.style.display = 'block';
+                
+                if (logoStyle) {
+                    logoImg.style.cssText += logoStyle;
+                }
+                
+                if (!showTitleInHeader) {
+                    logoImg.style.margin = '0 auto';
+                }
             } else if (logoImg) {
                 logoImg.style.display = 'none';
             }
 
-            const contentEl = document.getElementById('modalContent');
             const actionsEl = document.getElementById('modalActions');
-            
-            if (contentEl) contentEl.innerHTML = this.generateContentHTML(sections, stats);
             if (actionsEl) actionsEl.innerHTML = this.generateActionsHTML(links);
         }
 
@@ -544,14 +639,17 @@
 
         generateActionsHTML(links) {
             return `
-                <a href="${links.primary.url}" class="project-modal-btn primary" target="_blank" rel="noopener">
+                <a href="${links.primary.url}" class="project-modal-btn primary small" target="_blank" rel="noopener">
                     ${links.primary.text}
                 </a>
-                <a href="${links.secondary.url}" class="project-modal-btn secondary" target="_blank" rel="noopener">
+                <a href="${links.secondary.url}" class="project-modal-btn secondary small" target="_blank" rel="noopener">
                     ${links.secondary.text}
                 </a>
-                <a href="${links.community.url}" class="project-modal-btn community" target="_blank" rel="noopener">
+                <a href="${links.community.url}" class="project-modal-btn community small" target="_blank" rel="noopener">
                     ${links.community.text}
+                </a>
+                <a href="${links.twitter.url}" class="project-modal-btn twitter small" target="_blank" rel="noopener">
+                    ${links.twitter.text}
                 </a>
             `;
         }
@@ -559,18 +657,15 @@
         close() {
             if (!this.isOpen) return;
             
-            // Bezpośrednie ustawienie stylów
             this.overlay.style.opacity = '0';
             this.overlay.style.pointerEvents = 'none';
             
             this.modal.style.opacity = '0';
             this.modal.style.transform = 'translateY(20px)';
             
-            // WAŻNE: Natychmiast zresetuj stan
             this.isOpen = false;
             document.body.style.overflow = '';
             
-            // Ukryj po animacji
             setTimeout(() => {
                 if (!this.isOpen) {
                     this.overlay.style.visibility = 'hidden';
@@ -581,8 +676,5 @@
     }
 
     window.ProjectModal = ProjectModal;
-
-
     window.projectModal = new ProjectModal();
-
 })();
