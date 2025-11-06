@@ -28,9 +28,9 @@ class ComponentLoader {
 
   async loadPageStructure() {
     const sections = [
-      'components/modals/gm-modal/gm-modal',
-      'components/header/header',
+      'components/header/header', // HEADER FIRST - PRIORYTET!
       'components/modals/auth-modal/auth-modal',
+      'components/modals/gm-modal/gm-modal',
       'sections/projects/projects',
       'sections/gaming/gaming',
       'components/sidebar/sidebar',
@@ -42,8 +42,9 @@ class ComponentLoader {
     for (const section of sections) {
       await this.loadSection(section);
       if (section === 'components/header/header') {
-        await new Promise(resolve => setTimeout(resolve, 300));
-        this.initializeHeaderWithRetry();
+        // NATYCHMIASTOWA INICJALIZACJA HEADERA
+        await new Promise(resolve => setTimeout(resolve, 100));
+        this.initializeHeaderImmediately();
       }
     }
 
@@ -120,7 +121,7 @@ class ComponentLoader {
   }
 
   async loadJS(jsPath) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { // ✅ poprawione — brakowało =>
       const existingScript = document.querySelector(`script[src="${jsPath}"]`);
       if (existingScript) {
         resolve();
@@ -135,9 +136,68 @@ class ComponentLoader {
     });
   }
 
+  // NOWA METODA - SZYBSZA INICJALIZACJA HEADERA
+  initializeHeaderImmediately() {
+    console.log('🚀 Fast header initialization');
+    
+    // Natychmiastowe ustawienie przycisku Sign
+    const signBtn = document.getElementById('signBtn');
+    const mobileSignBtn = document.getElementById('mobileSignBtn');
+    
+    if (signBtn) {
+      signBtn.style.display = 'flex';
+      signBtn.style.visibility = 'visible';
+    }
+    if (mobileSignBtn) {
+      mobileSignBtn.style.display = 'flex';
+      mobileSignBtn.style.visibility = 'visible';
+    }
+    
+    // Szybsza inicjalizacja header navigation
+    if (typeof initializeHeader === 'function') {
+      initializeHeader();
+    } else if (window.initializeHeader) {
+      window.initializeHeader();
+    } else {
+      // Fallback emergency setup
+      this.setupAuthButtonsEmergency();
+    }
+  }
+
+  setupAuthButtonsEmergency() {
+    console.log('🔄 Emergency auth buttons setup');
+    
+    const signBtn = document.getElementById('signBtn');
+    const mobileSignBtn = document.getElementById('mobileSignBtn');
+    
+    if (signBtn) {
+      signBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.authModal) {
+          window.authModal.open();
+        } else if (window.web3Auth) {
+          window.web3Auth.connectWallet();
+        }
+      });
+    }
+    
+    if (mobileSignBtn) {
+      mobileSignBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.authModal) {
+          window.authModal.open();
+        } else if (window.web3Auth) {
+          window.web3Auth.connectWallet();
+        }
+      });
+    }
+  }
+
   initializeHeaderWithRetry() {
     let retries = 0;
-    const maxRetries = 5;
+    const maxRetries = 3; // MNIEJ PRÓB - SZYBCIEJ
     const tryInitialize = () => {
       retries++;
       if (typeof initializeHeader === 'function') {
@@ -148,7 +208,7 @@ class ComponentLoader {
         return true;
       } else {
         if (retries < maxRetries) {
-          setTimeout(tryInitialize, 500);
+          setTimeout(tryInitialize, 300); // KRÓTSZY CZAS
         } else {
           this.initializeHeaderEmergency();
         }

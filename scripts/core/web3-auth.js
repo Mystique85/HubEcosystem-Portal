@@ -9,9 +9,10 @@ class Web3Auth {
         this.checkExistingSession();
         this.setupEventListeners();
         
+        // SZYBSZA INICJALIZACJA UI
         setTimeout(() => {
             this.updateUI();
-        }, 1000);
+        }, 300);
     }
 
     checkExistingSession() {
@@ -145,36 +146,85 @@ class Web3Auth {
         if (userPanelBtn) userPanelBtn.classList.remove('active');
     }
 
+    // POPRAWIONA METODA updateUI - KLUCZOWA ZMIANA!
     updateUI() {
+        const isLoggedIn = !!this.user;
+        
+        // Desktop buttons
         const signBtn = document.getElementById('signBtn');
         const gmBtn = document.getElementById('gmBtn');
         const userPanelBtn = document.getElementById('userPanelBtn');
         const userAddress = document.getElementById('userAddress');
         const dropdownUserAddress = document.getElementById('dropdownUserAddress');
+        
+        // Mobile buttons
         const mobileUserSection = document.getElementById('mobileUserSection');
         const mobileUserAddress = document.getElementById('mobileUserAddress');
         const mobileSignBtn = document.getElementById('mobileSignBtn');
         const mobileGmBtn = document.getElementById('mobileGmBtn');
 
-        if (this.user) {
-            if (signBtn) signBtn.style.display = 'none';
-            if (gmBtn) gmBtn.style.display = 'flex';
+        if (isLoggedIn) {
+            // USER LOGGED IN - hide SIGN, show GM & user panel
+            if (signBtn) {
+                signBtn.style.display = 'none';
+                signBtn.style.visibility = 'hidden';
+            }
+            if (gmBtn) {
+                gmBtn.style.display = 'flex';
+                gmBtn.style.visibility = 'visible';
+            }
             if (userPanelBtn) {
                 userPanelBtn.style.display = 'flex';
+                userPanelBtn.style.visibility = 'visible';
                 if (userAddress) userAddress.textContent = this.user.shortAddress;
             }
             if (dropdownUserAddress) dropdownUserAddress.textContent = this.user.shortAddress;
-            if (mobileUserSection) mobileUserSection.style.display = 'block';
+            
+            // Mobile
+            if (mobileUserSection) {
+                mobileUserSection.style.display = 'block';
+                mobileUserSection.style.visibility = 'visible';
+            }
             if (mobileUserAddress) mobileUserAddress.textContent = this.user.shortAddress;
-            if (mobileSignBtn) mobileSignBtn.style.display = 'none';
-            if (mobileGmBtn) mobileGmBtn.style.display = 'flex';
+            if (mobileSignBtn) {
+                mobileSignBtn.style.display = 'none';
+                mobileSignBtn.style.visibility = 'hidden';
+            }
+            if (mobileGmBtn) {
+                mobileGmBtn.style.display = 'flex';
+                mobileGmBtn.style.visibility = 'visible';
+            }
         } else {
-            if (signBtn) signBtn.style.display = 'flex';
-            if (gmBtn) gmBtn.style.display = 'none';
-            if (userPanelBtn) userPanelBtn.style.display = 'none';
-            if (mobileUserSection) mobileUserSection.style.display = 'none';
-            if (mobileSignBtn) mobileSignBtn.style.display = 'flex';
-            if (mobileGmBtn) mobileGmBtn.style.display = 'none';
+            // USER NOT LOGGED IN - ALWAYS show SIGN, hide others
+            if (signBtn) {
+                signBtn.style.display = 'flex';
+                signBtn.style.visibility = 'visible';
+                signBtn.style.opacity = '1';
+                signBtn.style.pointerEvents = 'auto';
+            }
+            if (gmBtn) {
+                gmBtn.style.display = 'none';
+                gmBtn.style.visibility = 'hidden';
+            }
+            if (userPanelBtn) {
+                userPanelBtn.style.display = 'none';
+                userPanelBtn.style.visibility = 'hidden';
+            }
+            
+            // Mobile
+            if (mobileUserSection) {
+                mobileUserSection.style.display = 'none';
+                mobileUserSection.style.visibility = 'hidden';
+            }
+            if (mobileSignBtn) {
+                mobileSignBtn.style.display = 'flex';
+                mobileSignBtn.style.visibility = 'visible';
+                mobileSignBtn.style.opacity = '1';
+            }
+            if (mobileGmBtn) {
+                mobileGmBtn.style.display = 'none';
+                mobileGmBtn.style.visibility = 'hidden';
+            }
         }
     }
 
@@ -203,7 +253,11 @@ class Web3Auth {
             const mobileSignBtn = document.getElementById('mobileSignBtn');
             
             if (signBtn) {
-                signBtn.addEventListener('click', (e) => {
+                // Usuń istniejące event listeners i dodaj nowy
+                signBtn.replaceWith(signBtn.cloneNode(true));
+                const freshSignBtn = document.getElementById('signBtn');
+                
+                freshSignBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (window.authModal) {
@@ -227,9 +281,11 @@ class Web3Auth {
             }
         };
 
-        setupListeners();
-        setTimeout(setupListeners, 2000);
+        // Szybsze i pewniejsze setup event listeners
+        setTimeout(setupListeners, 500);
+        setTimeout(setupListeners, 1500); // Backup
         
+        // Dropdown handling
         setTimeout(() => {
             document.addEventListener('click', (e) => {
                 if (e.target.closest('#userPanelBtn')) {
@@ -250,8 +306,7 @@ class Web3Auth {
                     });
                 }
             });
-            
-        }, 1500);
+        }, 1000);
     }
 }
 

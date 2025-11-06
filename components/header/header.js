@@ -186,11 +186,12 @@ class HeaderNavigation {
 function initializeHeader() {
     setTimeout(() => {
         window.headerNavigation = new HeaderNavigation();
-    }, 100);
+    }, 50); // KRÓTSZY CZAS
 }
 
+// POPRAWIONA AUTO-INICJALIZACJA - SZYBSZA
 function autoInitializeHeader() {
-    const maxAttempts = 20;
+    const maxAttempts = 10; // MNIEJ PRÓB
     let attempts = 0;
     
     const checkHeader = setInterval(() => {
@@ -200,16 +201,21 @@ function autoInitializeHeader() {
         if (headerExists) {
             clearInterval(checkHeader);
             initializeHeader();
+            console.log('✅ Header initialized after', attempts, 'attempts');
         } else if (attempts >= maxAttempts) {
             clearInterval(checkHeader);
+            console.log('❌ Header initialization failed after', attempts, 'attempts');
         }
-    }, 200);
+    }, 150); // KRÓTSZY INTERWAŁ
 }
 
+// SZYBSZE URUCHOMIENIE
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', autoInitializeHeader);
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(autoInitializeHeader, 100);
+    });
 } else {
-    autoInitializeHeader();
+    setTimeout(autoInitializeHeader, 100);
 }
 
 if (typeof module !== 'undefined' && module.exports) {

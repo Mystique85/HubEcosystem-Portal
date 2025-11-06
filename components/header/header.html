@@ -143,10 +143,10 @@
                 </li>
             </ul>
 
-            <!-- PRZYCISKI AUTH - ZMIENIONE: teraz z dropdown menu dla user panel -->
+            <!-- PRZYCISKI AUTH - POPRAWIONE: Sign button zawsze widoczny dla niezalogowanych -->
             <div class="nav-auth-buttons flex items-center gap-3">
                 <!-- Dla NIEZALOGOWANYCH: -->
-                <button class="nav-sign-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: none;" id="signBtn">
+                <button class="nav-sign-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: flex;" id="signBtn">
                     SIGN <i class="fas fa-wallet text-xs"></i>
                 </button>
                 
@@ -261,7 +261,7 @@
                 <!-- Mobile Auth Buttons -->
                 <div class="mobile-auth-buttons space-y-4 pt-6">
                     <!-- Dla NIEZALOGOWANYCH: -->
-                    <button class="mobile-sign-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: none;" id="mobileSignBtn">
+                    <button class="mobile-sign-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: flex;" id="mobileSignBtn">
                         <i class="fas fa-wallet"></i>
                         SIGN IN
                     </button>
