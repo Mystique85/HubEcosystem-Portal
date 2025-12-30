@@ -1,6 +1,5 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-primary-dark/90 backdrop-blur-md border-b border-white/10 py-3">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <!-- Logo -->
         <div class="nav-logo flex items-center gap-3">
             <img src="images/hub-logo.svg" alt="HUB Ecosystem" class="logo-image w-9 h-9 rounded-lg object-contain">
             <span class="text-lg font-mono font-semibold tracking-tight animate-gradient-shift bg-gradient-to-r from-accent-neon via-accent-purple to-accent-blue bg-clip-text text-transparent bg-[length:200%_auto]">
@@ -8,11 +7,8 @@
             </span>
         </div>
         
-        <!-- Desktop Navigation - POPRAWIONE: właściwa struktura -->
         <div class="nav-desktop hidden md:flex items-center gap-12">
-            <!-- Menu przycisków - teraz z odpowiednim odstępem od logo -->
             <ul class="nav-links flex items-center list-none" style="gap: 20px">
-                <!-- Ecosystem Dropdown -->
                 <li class="nav-dropdown relative">
                     <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="ecosystem">
                         Ecosystem <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
@@ -53,7 +49,6 @@
                     </div>
                 </li>
 
-                <!-- Community Dropdown -->
                 <li class="nav-dropdown relative">
                     <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="community">
                         Community <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
@@ -64,6 +59,18 @@
                                 <div class="flex items-center gap-3 w-full">
                                     <i class="fas fa-users text-accent-neon text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
                                     <span class="font-medium whitespace-nowrap">Community Hub</span>
+                                </div>
+                            </a>
+                            <a href="https://hub-portal-chat.vercel.app/" target="_blank" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-comments text-accent-blue text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Chat</span>
+                                </div>
+                            </a>
+                            <a href="#staking" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
+                                <div class="flex items-center gap-3 w-full">
+                                    <i class="fas fa-coins text-green-400 text-sm w-5 text-center group-hover:scale-110 transition-transform flex items-center justify-center" style="height: 20px"></i>
+                                    <span class="font-medium whitespace-nowrap">Stake HUB</span>
                                 </div>
                             </a>
                             <a href="#events" class="dropdown-item flex items-center px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300 group">
@@ -94,7 +101,6 @@
                     </div>
                 </li>
 
-                <!-- Resources Dropdown -->
                 <li class="nav-dropdown relative">
                     <button class="nav-dropdown-btn flex items-center gap-1 text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 whitespace-nowrap" style="padding: 6px 10px" data-dropdown="resources">
                         Resources <i class="fas fa-chevron-down text-xs opacity-70 transition-transform duration-300"></i>
@@ -135,7 +141,6 @@
                     </div>
                 </li>
 
-                <!-- News Button - NIEKLIKALNY -->
                 <li>
                     <div class="nav-news-btn text-text-light text-sm font-medium bg-accent-blue/10 border border-accent-blue/30 rounded-lg flex items-center gap-2 whitespace-nowrap" style="padding: 6px 10px">
                         <i class="fas fa-newspaper text-xs"></i> News
@@ -143,19 +148,15 @@
                 </li>
             </ul>
 
-            <!-- PRZYCISKI AUTH - ZMIENIONE: teraz z dropdown menu dla user panel -->
             <div class="nav-auth-buttons flex items-center gap-3">
-                <!-- Dla NIEZALOGOWANYCH: -->
                 <button class="nav-sign-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: none;" id="signBtn">
                     SIGN <i class="fas fa-wallet text-xs"></i>
                 </button>
                 
-                <!-- Dla ZALOGOWANYCH: -->
                 <button class="nav-gm-btn text-primary-dark text-sm font-bold bg-gradient-to-r from-accent-neon to-accent-purple hover:scale-105 transition-transform rounded-full shadow-lg shadow-accent-neon/30 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 16px; display: none;" id="gmBtn">
                     SAY GM <i class="fas fa-hand-wave text-xs"></i>
                 </button>
                 
-                <!-- User Panel Dropdown -->
                 <div class="nav-dropdown relative">
                     <button class="nav-user-btn text-text-light text-sm font-medium hover:text-accent-neon transition-colors rounded-lg hover:bg-white/10 flex items-center gap-2 whitespace-nowrap" style="padding: 6px 12px; display: none;" id="userPanelBtn">
                         <i class="fas fa-user text-xs"></i> <span id="userAddress">0x...</span> <i class="fas fa-chevron-down text-xs opacity-70"></i>
@@ -177,13 +178,11 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button class="nav-mobile-btn md:hidden text-text-light p-2 rounded-lg hover:bg-white/10 transition-colors" id="mobileMenuBtn">
             <i class="fas fa-bars text-lg"></i>
         </button>
     </div>
 
-    <!-- Mobile Menu Overlay -->
     <div class="nav-mobile-menu fixed inset-0 bg-primary-dark/95 backdrop-blur-md z-40 opacity-0 invisible transition-all duration-300 md:hidden" id="mobileMenu">
         <div class="container max-w-7xl mx-auto px-6 pt-24 pb-8">
             <button class="nav-mobile-close absolute top-6 right-6 text-text-light p-2 rounded-lg hover:bg-white/10 transition-colors" id="mobileMenuClose">
@@ -191,7 +190,6 @@
             </button>
             
             <div class="mobile-nav-content space-y-6">
-                <!-- Mobile Ecosystem -->
                 <div class="mobile-dropdown">
                     <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="ecosystem">
                         <span class="flex items-center gap-3">
@@ -216,7 +214,6 @@
                     </div>
                 </div>
 
-                <!-- Mobile Community -->
                 <div class="mobile-dropdown">
                     <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="community">
                         <span class="flex items-center gap-3">
@@ -230,6 +227,14 @@
                             <i class="fas fa-users text-accent-neon text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
                             <span>Community Hub</span>
                         </a>
+                        <a href="https://hub-portal-chat.vercel.app/" target="_blank" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-comments text-accent-blue text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Chat</span>
+                        </a>
+                        <a href="#staking" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
+                            <i class="fas fa-coins text-green-400 text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
+                            <span>Stake HUB</span>
+                        </a>
                         <a href="#events" class="mobile-nav-item flex items-center gap-4 px-4 py-3 rounded-xl text-text-light hover:bg-white/10 hover:text-accent-neon transition-all duration-300">
                             <i class="fas fa-calendar text-accent-purple text-sm w-6 text-center flex items-center justify-center" style="height: 24px"></i>
                             <span>Events</span>
@@ -237,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- Mobile Resources -->
                 <div class="mobile-dropdown">
                     <button class="mobile-dropdown-btn flex items-center justify-between w-full text-text-light text-lg font-semibold py-4 border-b border-white/10" data-mobile-dropdown="resources">
                         <span class="flex items-center gap-3">
@@ -258,15 +262,12 @@
                     </div>
                 </div>
 
-                <!-- Mobile Auth Buttons -->
                 <div class="mobile-auth-buttons space-y-4 pt-6">
-                    <!-- Dla NIEZALOGOWANYCH: -->
                     <button class="mobile-sign-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: none;" id="mobileSignBtn">
                         <i class="fas fa-wallet"></i>
                         SIGN IN
                     </button>
                     
-                    <!-- Dla ZALOGOWANYCH: -->
                     <button class="mobile-gm-btn flex items-center justify-center gap-3 w-full bg-gradient-to-r from-accent-neon to-accent-purple text-primary-dark font-bold py-4 rounded-xl shadow-lg shadow-accent-neon/30 transition-transform hover:scale-105" style="display: none;" id="mobileGmBtn">
                         <i class="fas fa-hand-wave"></i>
                         SAY GM
