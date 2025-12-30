@@ -33,7 +33,6 @@ class ComponentLoader {
       'components/modals/auth-modal/auth-modal',
       'sections/projects/projects',
       'sections/gaming/gaming',
-      'components/sidebar/sidebar',
       'sections/about-project/about-project',
       'sections/community/community',
       'components/footer/footer'
@@ -72,7 +71,6 @@ class ComponentLoader {
       }
       this.loadedComponents.add(sectionPath);
     } catch (error) {
-      // Kontynuuj ładowanie nawet jeśli sekcja się nie załaduje
     }
   }
 
@@ -98,7 +96,6 @@ class ComponentLoader {
       await this.loadProjectModalCSS();
       await this.loadJS('components/modals/project-modal/project-modal.js');
     } catch (error) {
-      // Kontynuuj nawet jeśli modal projektu się nie załaduje
     }
   }
 
